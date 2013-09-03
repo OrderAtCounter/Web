@@ -1,8 +1,3 @@
-
-/**
- * Module dependencies.
- */
-
 var express = require('express')
   , http = require('http')
   , path = require('path');
@@ -24,7 +19,7 @@ if ('development' == app.get('env')) {
 }
 
 app.get('/', function(req, res) {
-	res.send('Hello');
+  res.send('Hello');
 });
 
 http.createServer(app).listen(app.get('port'), function(){
