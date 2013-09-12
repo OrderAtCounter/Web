@@ -80,7 +80,7 @@ exports.login = function(req, res) {
 exports.logout = function(req, res) {
   var username = req.body['username'];
   var sessionId = req.body['sessionId'];
-  Session.findOne({_id: sessionId, username: username}, function(err, session) {
+  Session.findOne({sessionId: sessionId, username: username}, function(err, session) {
     if(err) {
       res.send(500);
     }
