@@ -17,7 +17,7 @@ app.use(express.methodOverride());
 app.use(app.router);
 app.use(express.static(path.join(__dirname, 'public')));
 
-if ('development' == app.get('env')) {
+if (process.env.NODE_ENV === 'development') {
   app.use(express.errorHandler());
   var envFile = fs.readFileSync('./.env', 'utf-8');  
   envFile = envFile.split('\n');
