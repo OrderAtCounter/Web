@@ -30,3 +30,13 @@ Status Code: 200
 
 ###Web
 ####Create Account
+Description: Create a new user account with a username and password.  
+URL: http://orderatcounter.herokuapp.com/createAccount  
+Type: POST  
+#####Data Required
+username  
+password  
+#####Example Data
+{username: 'Chris', password: 'TestPassword'}  
+#####Success Response
+Status Code: 200, sessionId
