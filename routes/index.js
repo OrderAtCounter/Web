@@ -70,3 +70,26 @@ exports.login = function(req, res) {
     }
   });
 }
+
+exports.logout = function(req, res) {
+  var username = req.body['username'];
+  var sessionId = req.body['sessionId'];
+  Session.findOne({sessionId: sessionId, username: username}, function(err, session) {
+    if(err) {
+      res.send(500);
+    }
+    else if(session) {
+      session.remove(function(err) {
+        if(err) {
+          res.send(500);
+        }
+        else {
+          res.send(200);
+        }
+      });
+    }
+    else {
+      res.send(500);
+    }
+  });
+}

@@ -31,6 +31,7 @@ mongoose.connect(process.env.mongooseURL);
 
 app.post('/createAccount', routes.createAccount);
 app.post('/login', routes.login);
+app.post('/logout', routes.logout);
 
 http.createServer(app).listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));
