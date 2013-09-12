@@ -13,7 +13,7 @@ username
 password  
 #####Example Data 
 {username: 'Chris', password: 'TestPassword'} 
-####Success Response
+#####Success Response
 Status Code: 200, sessionId 
 
 ####Logout  
@@ -25,7 +25,7 @@ username
 sessionId  
 #####Example Data 
 {username: 'Chris', sessionId: '548905434324'} 
-####Success Response  
+#####Success Response  
 Status Code: 200  
 
 ###Web
