@@ -3,7 +3,8 @@ var express = require('express')
   , path = require('path')
   , mongoose = require('mongoose')
   , fs = require('fs')
-  , routes = require('./routes');
+  , webRoutes = require('./routes')
+  , iOSRoutes = require('./routes/iOS');
 
 var app = express();
 
@@ -29,9 +30,12 @@ if (process.env.NODE_ENV === 'development') {
 
 mongoose.connect(process.env.mongooseURL);
 
-app.post('/createAccount', routes.createAccount);
-app.post('/login', routes.login);
-app.post('/logout', routes.logout);
+/* Web Routes */
+app.post('/createAccount', webRoutes.createAccount);
+
+/* iOS Routes */
+app.post('/iOSLogin', iOSRoutes.login);
+app.post('/iOSLogout', iOSRoutes.logout);
 
 http.createServer(app).listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));
