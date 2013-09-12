@@ -29,12 +29,19 @@ if (process.env.NODE_ENV === 'development') {
 
 mongoose.connect(process.env.mongooseURL);
 
-/* Web Routes */
+/* Web GET routes */
+app.get('/createAccount', webRoutes.getCreateAccount);
+
+/* Web POST routes */
 app.post('/createAccount', webRoutes.createAccount);
 
-/* iOS Routes */
+
+/* iOS GET Routes */
+
+/* iOS POST Routes */
 app.post('/iOSLogin', iOSRoutes.login);
 app.post('/iOSLogout', iOSRoutes.logout);
+app.post('/iOSOrder', iOSRoutes.createOrder);
 
 http.createServer(app).listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));

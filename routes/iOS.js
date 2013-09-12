@@ -5,6 +5,7 @@ var User = mongooseModels.User;
 var Session = mongooseModels.Session;
 var Order = mongooseModels.Order;
 
+/* POST for logging in */
 exports.login = function(req, res) {
   var username = req.body['username'];
   var password = req.body['password'];
@@ -35,10 +36,11 @@ exports.login = function(req, res) {
   });
 }
 
+/* POST for logging out */
 exports.logout = function(req, res) {
   var username = req.body['username'];
   var sessionId = req.body['sessionId'];
-  Session.findOne({sessionId: sessionId, username: username}, function(err, session) {
+  Session.findOne({_id: sessionId, username: username}, function(err, session) {
     if(err) {
       res.send(500, 'Database/Server error finding the session.');
     }
@@ -54,6 +56,51 @@ exports.logout = function(req, res) {
     }
     else {
       res.send(500, 'Session does not exist.');
+    }
+  });
+}
+
+/* POST for creating order */
+exports.createOrder = function(req, res) {
+  var sessionId = req.body['sessionId'];
+  var username = req.body['username'];
+  Session.findOne({_id: sessionId, username: username}, function(err, session) {
+    if(err) {
+      res.send(500, 'Database/Server error finding the session.');
+    }
+    else if(session) {
+      var orderNumber = req.body['orderNumber'];
+      var phoneNumber = req.body['phoneNumber'];
+      var order = new Order({orderNumber: orderNumber, phoneNumber: phoneNumber});
+      order.save(function(err, newOrder) {
+        if(err) {
+          res.send(500, 'Database/Server error while saving new order.');
+        }
+        else {
+          User.findOne({username: username}, function(err, user) {
+            if(err) {
+              res.send(500, 'Database/Server error finding the user.');
+            }
+            else if(user) {
+              user.Orders.push(newOrder._id);
+              user.save(function(err) {
+                if(err) {
+                  res.send(500, 'Database/Server error saving the user.');
+                }
+                else {
+                  res.send(200);
+                }
+              });
+            }
+            else {
+              res.send(500, 'User does not exist.');
+            }
+          });
+        }
+      });
+    }
+    else {
+      res.send(500, 'Session does not exist. Username may or may not be correct. No guarantees on server end on which was wrong.');
     }
   });
 }
