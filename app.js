@@ -1,6 +1,9 @@
 var express = require('express')
   , http = require('http')
-  , path = require('path');
+  , path = require('path')
+  , mongoose = require('mongoose')
+  , fs = require('fs')
+  , routes = require('./routes');
 
 var app = express();
 
@@ -16,11 +19,18 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 if ('development' == app.get('env')) {
   app.use(express.errorHandler());
+  var envFile = fs.readFileSync('./.env', 'utf-8');  
+  envFile = envFile.split('\n');
+  for(var i = 0; i < envFile.length; i++) {
+    var variable = envFile[i].split('=');
+    process.env[variable[0]] = variable[1];
+  }
 }
 
-app.get('/', function(req, res) {
-  res.send('Hello');
-});
+mongoose.connect(process.env.mongooseURL);
+
+app.post('/createAccount', routes.createAccount);
+app.post('/login', routes.login);
 
 http.createServer(app).listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));
