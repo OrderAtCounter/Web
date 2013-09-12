@@ -18,7 +18,7 @@ Status Code: 200, sessionId
 
 ####Logout  
 Description: Log a user out of the application and delete the session.  
-URL: 'http://orderatcounter.herokuapp.com/iOSLogout' 
+URL: 'http://orderatcounter.herokuapp.com/iOSLogout'  
 Type: 'POST'  
 #####Data Required  
 username  
