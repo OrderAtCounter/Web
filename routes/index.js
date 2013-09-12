@@ -11,6 +11,11 @@ var SessionSchema = new Schema({
   source: String
 });
 
+var OrderSchema = new Schema({
+  number: Number,
+  User: 
+});
+
 var User = mongoose.model('User', UserSchema);
 var Session = mongoose.model('Session', SessionSchema);
 

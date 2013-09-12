@@ -35,12 +35,12 @@ exports.logout = function(req, res) {
   var sessionId = req.body['sessionId'];
   Session.findOne({sessionId: sessionId, username: username}, function(err, session) {
     if(err) {
-      res.send(500);
+      res.send(500, 'Database/Server error finding the session.');
     }
     else if(session) {
       session.remove(function(err) {
         if(err) {
-          res.send(500);
+          res.send(500, 'Database/Server error removing the session.');
         }
         else {
           res.send(200);
@@ -48,7 +48,7 @@ exports.logout = function(req, res) {
       });
     }
     else {
-      res.send(500);
+      res.send(500, 'Session does not exist.');
     }
   });
 }
