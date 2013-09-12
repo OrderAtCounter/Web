@@ -6,7 +6,7 @@ Order At The Counter
 
 ####Login  
 Description: Log a user into the application and create a new session for the user.  
-URL: http://orderatcounter.herokuapp.com/iOSLogin 
+URL: http://orderatcounter.herokuapp.com/iOSLogin  
 Type: POST  
 #####Data Required  
 username  
