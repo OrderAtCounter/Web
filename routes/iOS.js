@@ -1,4 +1,9 @@
 var mongoose = require('mongoose');
+var mongooseModels = require('../models/MongooseModels');
+
+var User = mongooseModels.User;
+var Session = mongooseModels.Session;
+var Order = mongooseModels.Order;
 
 exports.login = function(req, res) {
   var username = req.body['username'];

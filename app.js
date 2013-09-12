@@ -5,7 +5,6 @@ var express = require('express')
   , fs = require('fs')
   , webRoutes = require('./routes')
   , iOSRoutes = require('./routes/iOS');
-
 var app = express();
 
 app.set('port', process.env.PORT || 3000);
