@@ -1,20 +1,23 @@
 Web
 ===
-##Routes
+##Routes  
 
-###iOS
+###iOS  
 
-####Login
+####Login  
 
-Description: Log a user into the application and create a new session for the user.
-URL: 'http://orderatcounter.herokuapp.com/iOSLogin'
-Type: 'POST'
-#####Data Required
+Description: Log a user into the application and create a new session for the user.  
+
+URL: 'http://orderatcounter.herokuapp.com/iOSLogin' 
+
+Type: 'POST'  
+
+#####Data Required  
 
 username
-password
+password  
 
-####Logout
+####Logout  
 
 ###Web
 ####Create Account
