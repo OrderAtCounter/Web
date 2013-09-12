@@ -3,7 +3,8 @@ var Schema = mongoose.Schema;
 
 var UserSchema = new Schema({
   username: String,
-  password: String
+  password: String,
+  Orders: [Schema.Types.ObjectId]
 });
 
 var SessionSchema = new Schema({
@@ -12,12 +13,14 @@ var SessionSchema = new Schema({
 });
 
 var OrderSchema = new Schema({
-  number: Number,
-  User: 
+  orderNumber: Number,
+  phoneNumber: String,
+  completed: Boolean
 });
 
 var User = mongoose.model('User', UserSchema);
 var Session = mongoose.model('Session', SessionSchema);
+var Order = mongoose.model('Order', OrderSchema);
 
 exports.createAccount = function(req, res) {
   var username = req.body['username'];
