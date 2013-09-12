@@ -24,17 +24,23 @@ exports.createAccount = function(req, res) {
       res.send(500);
     }
     else {
-      User.insert({username: username, password: password}, function(err, newUser) {
-        var session = new Session({'username': username});
-        session.save(function(err, returnedSession) {
-          if(err) {
-            res.send(500);
-          }
-          else {
-            var sessionId = returnedSession._id;
-            res.json({'sessionId': sessionId});
-          }
-        });
+      var newUser = new User({username: username, password: password});
+      newUser.save(function(err, returnedUser) {
+        if(err) {
+          res.send(500);
+        }
+        else {
+          var session = new Session({'username': username});
+          session.save(function(err, returnedSession) {
+            if(err) {
+              res.send(500);
+            }
+            else {
+              var sessionId = returnedSession._id;
+              res.json({'sessionId': sessionId});
+            }
+          });
+        }
       });
     }
   });
