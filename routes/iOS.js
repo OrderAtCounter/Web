@@ -16,7 +16,7 @@ exports.login = function(req, res) {
     }
     else {
       if(!user) {
-        res.send(500, 'There is no user with that username.');
+        res.send(500, 'There is no user with that email.');
       }
       else if(user.password === password) {
         var session = new Session({email: email, source: 'iOS'});
@@ -39,7 +39,7 @@ exports.login = function(req, res) {
 
 /* POST for logging out */
 exports.logout = function(req, res) {
-  var username = req.body['username'];
+  var email = req.body['email'];
   var sessionId = req.body['sessionId'];
   Session.findOne({_id: sessionId, email: email}, function(err, session) {
     if(err) {
@@ -109,7 +109,7 @@ exports.createOrder = function(req, res) {
       });
     }
     else {
-      res.send(500, 'Session does not exist. Username may or may not be correct. No guarantees on server end on which was wrong.');
+      res.send(500, 'Session does not exist. Email may or may not be correct. No guarantees on server end on which was wrong.');
     }
   });
 }
