@@ -9,10 +9,10 @@ Description: Log a user into the application and create a new session for the us
 URL: http://orderatcounter.herokuapp.com/iOSLogin  
 Type: POST  
 #####Data Required
-username  
+email   
 password  
 #####Example Data
-{username: 'Chris', password: 'TestPassword'} 
+{email: 'chris.amavisca@gmail.com's, password: 'TestPassword'} 
 #####Success Response
 Status Code: 200, sessionId 
 
@@ -21,10 +21,10 @@ Description: Log a user out of the application and delete the session.
 URL: http://orderatcounter.herokuapp.com/iOSLogout  
 Type: POST  
 #####Data Required
-username  
+email  
 sessionId  
 #####Example Data
-{username: 'Chris', sessionId: '548905434324'} 
+{email: 'chris.amavisca@gmail.com', sessionId: '548905434324'} 
 #####Success Response
 Status Code: 200  
 
@@ -34,9 +34,9 @@ Description: Create a new user account with a username and password.
 URL: http://orderatcounter.herokuapp.com/createAccount  
 Type: POST  
 #####Data Required
-username  
+email  
 password  
 #####Example Data
-{username: 'Chris', password: 'TestPassword'}  
+{email: 'chris.amavisca@gmail.com', password: 'TestPassword'}  
 #####Success Response
 Status Code: 200, sessionId
