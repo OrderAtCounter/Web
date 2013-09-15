@@ -4,6 +4,7 @@ var Schema = mongoose.Schema;
 var UserSchema = new Schema({
   email: String,
   password: String,
+  businessName: String,
   Orders: [{type: String, ref: 'Order'}]
 });
 

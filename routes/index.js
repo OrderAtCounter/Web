@@ -10,34 +10,41 @@ var Contact = mongooseModels.Contact;
 exports.createAccount = function(req, res) {
   var email = req.body['email'];
   var password = req.body['password'];
-  User.findOne({email: email}, function(err, user) {
-    if(err) {
-      res.send(500, 'There was an error in searching through the User collection for a user.');
-    }
-    else if(user) {
-      res.send(500, 'There is already a user with that username.');
-    }
-    else {
-      var newUser = new User({email: email, password: password});
-      newUser.save(function(err, returnedUser) {
-        if(err) {
-          res.send(500, 'There was an error in saving the new user.');
-        }
-        else {
-          var session = new Session({email: returnedUser.email});
-          session.save(function(err, returnedSession) {
-            if(err) {
-              res.send(500, 'There was an error in saving the new session.');
-            }
-            else {
-              var sessionId = returnedSession._id;
-              res.send(200, {'sessionId': sessionId});
-            }
-          });
-        }
-      });
-    }
-  });
+  var confirmPassword = req.body['confirmPassword'];
+  var businessName = req.body['businessName'];
+  if(password !== confirmPassword) {
+    res.send(500, 'Passwords do not match.');
+  }
+  else {
+    User.findOne({email: email}, function(err, user) {
+      if(err) {
+        res.send(500, 'There was an error in searching through the User collection for a user.');
+      }
+      else if(user) {
+        res.send(500, 'There is already a user with that username.');
+      }
+      else {
+        var newUser = new User({email: email, password: password, businessName: businessName});
+        newUser.save(function(err, returnedUser) {
+          if(err) {
+            res.send(500, 'There was an error in saving the new user.');
+          }
+          else {
+            var session = new Session({email: returnedUser.email});
+            session.save(function(err, returnedSession) {
+              if(err) {
+                res.send(500, 'There was an error in saving the new session.');
+              }
+              else {
+                var sessionId = returnedSession._id;
+                res.send(200, {'sessionId': sessionId});
+              }
+            });
+          }
+        });
+      }
+    });
+  }
 }
 
 /* GET for creating acount */
