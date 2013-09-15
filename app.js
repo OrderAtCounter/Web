@@ -4,7 +4,11 @@ var express = require('express')
   , mongoose = require('mongoose')
   , fs = require('fs')
   , webRoutes = require('./routes')
-  , iOSRoutes = require('./routes/iOS');
+  , iOSRoutes = require('./routes/iOS')
+  , passport = require('passport')
+  , LocalStrategy = require('passport-local').Strategy
+  , User = require('./models/User');
+
 var app = express();
 
 app.set('port', process.env.PORT || 3000);
@@ -28,6 +32,42 @@ if (process.env.NODE_ENV === 'development') {
 }
 
 mongoose.connect(process.env.mongooseURL);
+
+passport.serializeUser(function(user, callback) {
+  callback(null, user.id);
+});
+
+passport.deserializeUser(function(id, callback) {
+  User.findUserById(id, function(err, user) {
+    if(err) {
+      callback(err);
+    }
+    else {
+      callback(null, user);
+    }
+  });
+});
+
+passport.use(new LocalStrategy(
+  function(username, password, callback) {
+    process.nextTick(function() {
+      User.findUserByUsername(username, function(err, user) {
+        if(err) {
+          callback(err);
+        }
+        else if(!user) {
+          callback(null, false);
+        }
+        else if(user.password !== password) {
+          callback(null, false);
+        }
+        else {
+          callback(null, user);
+        }
+      });
+    });
+  }
+));
 
 /* Web GET routes */
 app.get('/', webRoutes.getIndex);
