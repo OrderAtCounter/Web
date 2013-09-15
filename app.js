@@ -30,6 +30,7 @@ if (process.env.NODE_ENV === 'development') {
 mongoose.connect(process.env.mongooseURL);
 
 /* Web GET routes */
+app.get('/', webRoutes.getIndex);
 app.get('/createAccount', webRoutes.getCreateAccount);
 
 /* Web POST routes */

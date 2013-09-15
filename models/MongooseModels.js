@@ -14,14 +14,20 @@ var SessionSchema = new Schema({
 
 var OrderSchema = new Schema({
   orderNumber: Number,
-  phoneNumber: String,
+  Contact: {type: String, ref: 'Contact'},
   completed: {type: Boolean, default: false}
+});
+
+var ContactSchema = new Schema({
+  phoneNumber: String
 });
 
 var User = mongoose.model('User', UserSchema);
 var Session = mongoose.model('Session', SessionSchema);
 var Order = mongoose.model('Order', OrderSchema);
+var Contact = mongoose.model('Contact', ContactSchema);
 
 exports.User = User;
 exports.Session = Session;
 exports.Order = Order;
+exports.Contact = Contact;

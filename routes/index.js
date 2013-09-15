@@ -4,6 +4,7 @@ var mongooseModels = require('../models/MongooseModels');
 var User = mongooseModels.User;
 var Session = mongooseModels.Session;
 var Order = mongooseModels.Order;
+var Contact = mongooseModels.Contact;
 
 /* POST for creating account */
 exports.createAccount = function(req, res) {
@@ -42,4 +43,9 @@ exports.createAccount = function(req, res) {
 /* GET for creating acount */
 exports.getCreateAccount = function(req, res) {
   res.render('createAccount');
+}
+
+/* GET for index */
+exports.getIndex = function(req, res) {
+  res.render('index');
 }
