@@ -75,7 +75,12 @@ app.get('/createAccount', webRoutes.getCreateAccount);
 
 /* Web POST routes */
 app.post('/createAccount', webRoutes.createAccount);
-
+app.post('/login',
+  passport.authenticate('local', {failureRedirect: '/login'}),
+  function(req, res) {
+    res.redirect('/');
+  }
+);
 
 /* iOS GET Routes */
 
@@ -87,3 +92,12 @@ app.post('/iOSOrder', iOSRoutes.createOrder);
 http.createServer(app).listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));
 });
+
+function ensureAuthenticated(req, res, callback) {
+  if(req.isAuthenticated()) {
+    callback();
+  }
+  else {
+    res.redirect('/login');
+  }
+}
