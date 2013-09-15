@@ -8,9 +8,9 @@ var Contact = mongooseModels.Contact;
 
 /* POST for logging in */
 exports.login = function(req, res) {
-  var username = req.body['username'];
+  var email = req.body['email'];
   var password = req.body['password'];
-  User.findOne({'username': username}, function(err, user) {
+  User.findOne({email: email}, function(err, user) {
     if(err) {
       res.send(500, 'There was an error in searching through the User collection for a user.')
     }
@@ -19,7 +19,7 @@ exports.login = function(req, res) {
         res.send(500, 'There is no user with that username.');
       }
       else if(user.password === password) {
-        var session = new Session({'username': username, source: 'iOS'});
+        var session = new Session({email: email, source: 'iOS'});
         session.save(function(err, returnedSession) {
           if(err) {
             res.send(500, 'There was an error in saving the new session.');
@@ -41,7 +41,7 @@ exports.login = function(req, res) {
 exports.logout = function(req, res) {
   var username = req.body['username'];
   var sessionId = req.body['sessionId'];
-  Session.findOne({_id: sessionId, username: username}, function(err, session) {
+  Session.findOne({_id: sessionId, email: email}, function(err, session) {
     if(err) {
       res.send(500, 'Database/Server error finding the session.');
     }
@@ -64,8 +64,8 @@ exports.logout = function(req, res) {
 /* POST for creating order */
 exports.createOrder = function(req, res) {
   var sessionId = req.body['sessionId'];
-  var username = req.body['username'];
-  Session.findOne({_id: sessionId, username: username}, function(err, session) {
+  var email = req.body['email'];
+  Session.findOne({_id: sessionId, email: email}, function(err, session) {
     if(err) {
       res.send(500, 'Database/Server error finding the session.');
     }
@@ -84,7 +84,7 @@ exports.createOrder = function(req, res) {
               res.send(500, 'Database/Server error while saving new order.');
             }
             else {
-              User.findOne({username: username}, function(err, user) {
+              User.findOne({email: email}, function(err, user) {
                 if(err) {
                   res.send(500, 'Database/Server error finding the user.');
                 }

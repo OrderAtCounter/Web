@@ -49,9 +49,9 @@ passport.deserializeUser(function(id, callback) {
 });
 
 passport.use(new LocalStrategy(
-  function(username, password, callback) {
+  function(email, password, callback) {
     process.nextTick(function() {
-      User.findUserByUsername(username, function(err, user) {
+      User.findUserByEmail(email, function(err, user) {
         if(err) {
           callback(err);
         }
@@ -75,6 +75,7 @@ app.get('/createAccount', webRoutes.getCreateAccount);
 
 /* Web POST routes */
 app.post('/createAccount', webRoutes.createAccount);
+
 app.post('/login',
   passport.authenticate('local', {failureRedirect: '/login'}),
   function(req, res) {

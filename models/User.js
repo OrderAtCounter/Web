@@ -14,8 +14,8 @@ exports.findUserById = function(id, callback) {
   });
 }
 
-exports.findUserByUsername = function(username, callback) {
-  User.findOne({username: username}, function(err, user) {
+exports.findUserByEmail = function(email, callback) {
+  User.findOne({email: email}, function(err, user) {
     if(err) {
       callback(err);
     }

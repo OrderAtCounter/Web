@@ -1,0 +1,33 @@
+html
+  head
+    include bootstrap
+    link(rel='stylesheet', href='/stylesheets/createAccount.css')
+  body
+    div.container
+      div.row
+        div.col-md-4#titleColumn
+          h1 Create Account
+      form(role='form', method='POST', action='/createAccount')
+        div.row
+          div.col-md-4
+            div.form-group
+              label(for='inputEmail') Email Address
+              input.form-control(type='email', id='inputEmail', placeholder='Enter email')
+        div.row
+          div.col-md-4
+            div.form-group
+              label(for='inputBusinessName') Business Name
+              input.form-control(type='text', id='inputBusinessName', placeholder='Enter business name')
+        div.row
+          div.col-md-4
+            div.form-group
+              label(for='inputPassword') Password
+              input.form-control(type='password', id='inputPassword', placeholder='Enter password')
+        div.row
+          div.col-md-4
+            div.form-group
+              label(for='inputConfirmPassword') Confirm Password
+              input.form-control(type='password', id='inputConfirmPassword', placeholder='Confirm password')
+        div.row
+          div.col-md-4
+            button.btn.btn-primary Create Account
