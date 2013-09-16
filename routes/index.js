@@ -102,6 +102,29 @@ exports.createOrder = function(req, res) {
   });
 }
 
+/* POST for removing order */
+exports.removeOrder = function(req, res) {
+  var orderNumber = req.body['orderNumber'];
+  var user = req.user;
+  Order.findOne({_id: {$in: user.Orders}, orderNumber: orderNumber}, function(err, order) {
+    if(err) {
+      res.send(500, 'Error finding order to remove.');
+    }
+    else {
+      var index = user.Orders.indexOf(order._id);
+      user.Orders.splice(index, 1);
+      user.save(function(err) {
+        if(err) {
+          res.send(500, 'Error saving user.');
+        }
+        else {
+          res.send(200);
+        }
+      });
+    }
+  });
+}
+
 /* GET for creating acount */
 exports.getCreateAccount = function(req, res) {
   res.render('createAccount');
