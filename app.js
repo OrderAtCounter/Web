@@ -7,7 +7,8 @@ var express = require('express')
   , iOSRoutes = require('./routes/iOS')
   , passport = require('passport')
   , LocalStrategy = require('passport-local').Strategy
-  , User = require('./models/User');
+  , User = require('./models/User')
+  , RedisStore = require('connect-redis')(express);
 
 var app = express();
 
@@ -19,7 +20,7 @@ app.use(express.logger('dev'));
 app.use(express.bodyParser());
 app.use(express.cookieParser('secret'));
 app.use(express.methodOverride());
-app.use(express.session({secret: 'test'}));
+app.use(express.session({secret: 'test', store: new RedisStore}));
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(app.router);
@@ -77,10 +78,12 @@ passport.use(new LocalStrategy(
 app.get('/', webRoutes.getIndex);
 app.get('/createAccount', webRoutes.getCreateAccount);
 app.get('/login', webRoutes.getLogin);
+app.get('/logout', webRoutes.getLogout);
 
 /* Web POST routes */
 app.post('/createAccount', webRoutes.createAccount);
 app.post('/loginUser', webRoutes.login);
+app.post('/createOrder', ensureAuthenticated, webRoutes.createOrder);
 
 /* iOS GET Routes */
 

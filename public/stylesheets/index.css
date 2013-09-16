@@ -1,4 +1,12 @@
-button#createOrderButton {
-  width: 200px;
-  height: 50px;
+#mainRow {
+  margin-top: 50px;
+}
+
+#orderDashboardColumn {
+  height: 600px;
+}
+
+#createOrderColumn {
+  float: right;
+  height: 600px;
 }

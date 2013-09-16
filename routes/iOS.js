@@ -4,7 +4,6 @@ var mongooseModels = require('../models/MongooseModels');
 var User = mongooseModels.User;
 var Session = mongooseModels.Session;
 var Order = mongooseModels.Order;
-var Contact = mongooseModels.Contact;
 
 /* POST for logging in */
 exports.login = function(req, res) {
@@ -72,37 +71,29 @@ exports.createOrder = function(req, res) {
     else if(session) {
       var orderNumber = req.body['orderNumber'];
       var phoneNumber = req.body['phoneNumber'];
-      var contact = new Contact({phoneNumber: phoneNumber});
-      contact.save(function(err, newContact) {
+      var order = new Order({orderNumber: orderNumber, phoneNumber: phoneNumber});
+      order.save(function(err, newOrder) {
         if(err) {
-          res.send(500, 'Database/Server error saving the contact.');
+          res.send(500, 'Database/Server error while saving new order.');
         }
         else {
-          var order = new Order({orderNumber: orderNumber, Contact: newContact._id});
-          order.save(function(err, newOrder) {
+          User.findOne({email: email}, function(err, user) {
             if(err) {
-              res.send(500, 'Database/Server error while saving new order.');
+              res.send(500, 'Database/Server error finding the user.');
             }
-            else {
-              User.findOne({email: email}, function(err, user) {
+            else if(user) {
+              user.Orders.push(newOrder._id);
+              user.save(function(err) {
                 if(err) {
-                  res.send(500, 'Database/Server error finding the user.');
-                }
-                else if(user) {
-                  user.Orders.push(newOrder._id);
-                  user.save(function(err) {
-                    if(err) {
-                      res.send(500, 'Database/Server error saving the user.');
-                    }
-                    else {
-                      res.send(200);
-                    }
-                  });
+                  res.send(500, 'Database/Server error saving the user.');
                 }
                 else {
-                  res.send(500, 'User does not exist.');
+                  res.send(200);
                 }
               });
+            }
+            else {
+              res.send(500, 'User does not exist.');
             }
           });
         }
