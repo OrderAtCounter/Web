@@ -81,6 +81,7 @@ exports.login = function(req, res) {
 exports.createOrder = function(req, res) {
   var orderNumber = req.body['orderNumber'];
   var phoneNumber = req.body['phoneNumber'];
+  phoneNumber = phoneNumber.replace(/\D/g, '');
   var user = req.user;
   var order = new Order({orderNumber: orderNumber, phoneNumber: phoneNumber});
   order.save(function(err, newOrder) {
