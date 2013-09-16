@@ -29,21 +29,12 @@ exports.createAccount = function(req, res) {
             res.send(500, 'There was an error in saving the new user.');
           }
           else {
-            var session = new Session({email: returnedUser.email});
-            session.save(function(err, returnedSession) {
+            req.login(returnedUser, function(err) {
               if(err) {
-                res.send(500, 'There was an error in saving the new session.');
+                res.send(500, 'Error logging in after creating account.');
               }
               else {
-                var sessionId = returnedSession._id;
-                req.login(returnedUser, function(err) {
-                  if(err) {
-                    res.send(500, 'Error logging in after creating account.');
-                  }
-                  else {
-                    res.redirect('/');
-                  }
-                });
+                res.redirect('/');
               }
             });
           }
