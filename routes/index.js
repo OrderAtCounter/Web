@@ -4,7 +4,6 @@ var mongooseModels = require('../models/MongooseModels');
 var User = mongooseModels.User;
 var Session = mongooseModels.Session;
 var Order = mongooseModels.Order;
-var Contact = mongooseModels.Contact;
 
 /* POST for creating account */
 exports.createAccount = function(req, res) {
@@ -78,6 +77,64 @@ exports.login = function(req, res) {
   });
 }
 
+/* POST for creating order */
+exports.createOrder = function(req, res) {
+  var orderNumber = req.body['orderNumber'];
+  var phoneNumber = req.body['phoneNumber'];
+  phoneNumber = phoneNumber.replace(/\D/g, '');
+  var user = req.user;
+  Order.findOne({orderNumber: orderNumber}, function(err, orderExists) {
+    if(err) {
+      res.send(500, 'Error finding if order exists.');
+    }
+    else if(orderExists){
+      res.send(500, 'Order exists.');
+    }
+    else {
+      var order = new Order({orderNumber: orderNumber, phoneNumber: phoneNumber});
+      order.save(function(err, newOrder) {
+        if(err) {
+          res.send(500, 'Error saving order.');
+        }
+        else {
+          user.Orders.push(newOrder._id);
+          user.save(function(err) {
+            if(err) {
+              res.send('Error updating User with new Order.');
+            }
+            else {
+              res.send(200, newOrder);
+            }
+          });
+        }
+      });
+    }
+  });
+}
+
+/* POST for removing order */
+exports.removeOrder = function(req, res) {
+  var orderNumber = req.body['orderNumber'];
+  var user = req.user;
+  Order.findOne({_id: {$in: user.Orders}, orderNumber: orderNumber}, function(err, order) {
+    if(err) {
+      res.send(500, 'Error finding order to remove.');
+    }
+    else {
+      var index = user.Orders.indexOf(order._id);
+      user.Orders.splice(index, 1);
+      user.save(function(err) {
+        if(err) {
+          res.send(500, 'Error saving user.');
+        }
+        else {
+          res.send(200);
+        }
+      });
+    }
+  });
+}
+
 /* GET for creating acount */
 exports.getCreateAccount = function(req, res) {
   res.render('createAccount');
@@ -88,10 +145,23 @@ exports.getLogin = function(req, res) {
   res.render('login');
 }
 
+/* GET for logging out */
+exports.getLogout = function(req, res) {
+  req.logout();
+  res.redirect('/');
+}
+
 /* GET for index */
 exports.getIndex = function(req, res) {
   if(req.user) {
-    res.render('index', {user: req.user});
+    Order.find({_id: {$in: req.user.Orders}}, function(err, orders) {
+      if(err) {
+        res.send(500, 'Error finding orders.');
+      }
+      else {
+        res.render('index', {user: req.user, orders: orders});
+      }
+    });
   }
   else {
     res.render('landing');
