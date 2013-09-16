@@ -73,7 +73,7 @@ Redirect to '/'
 ####Create Order
 Description: Create a new order for a user  
 URL: http://orderatcounter.herokuapp.com/createOrder  
-Type: 'POST'
+Type: POST  
 ####Data Required  
 orderNumber  
 phoneNumber  
@@ -85,7 +85,7 @@ Status Code: 200, order
 ####Remove Order
 Description: Remove an order for a user  
 URL: http://orderatcounter.herokuapp.com/removeOrder  
-Type: 'POST'
+Type: POST  
 ####Data Required  
 orderNumber  
 ####Example Data  
