@@ -1,0 +1,30 @@
+#accountColumn {
+  border: 1px solid;
+  float: right;
+  height: 600px;
+}
+
+#descriptiveColumn {
+  border: 1px solid;
+  height: 600px;
+}
+
+div#branding {
+  border: 1px solid;
+  width: 500px;
+  height: 150px;
+  margin: 0 auto;
+  float: none;
+}
+
+div#procedure {
+  border: 1px solid;
+  width: 500px;
+  height: 300px;
+  margin-left: 75px;
+  margin-top: 50px;
+}
+
+div#mainRow {
+  margin-top: 50px;
+}

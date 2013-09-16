@@ -61,5 +61,10 @@ exports.getCreateAccount = function(req, res) {
 
 /* GET for index */
 exports.getIndex = function(req, res) {
-  res.render('index', {user: req.user});
+  if(req.user) {
+    res.render('index', {user: req.user});
+  }
+  else {
+    res.render('landing');
+  }
 }
