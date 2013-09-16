@@ -83,19 +83,29 @@ exports.createOrder = function(req, res) {
   var phoneNumber = req.body['phoneNumber'];
   phoneNumber = phoneNumber.replace(/\D/g, '');
   var user = req.user;
-  var order = new Order({orderNumber: orderNumber, phoneNumber: phoneNumber});
-  order.save(function(err, newOrder) {
+  Order.findOne({orderNumber: orderNumber}, function(err, orderExists) {
     if(err) {
-      res.send(500, 'Error saving order.');
+      res.send(500, 'Error finding if order exists.');
+    }
+    else if(orderExists){
+      res.send(500, 'Order exists.');
     }
     else {
-      user.Orders.push(newOrder._id);
-      user.save(function(err) {
+      var order = new Order({orderNumber: orderNumber, phoneNumber: phoneNumber});
+      order.save(function(err, newOrder) {
         if(err) {
-          res.send('Error updating User with new Order.');
+          res.send(500, 'Error saving order.');
         }
         else {
-          res.send(200);
+          user.Orders.push(newOrder._id);
+          user.save(function(err) {
+            if(err) {
+              res.send('Error updating User with new Order.');
+            }
+            else {
+              res.send(200, newOrder);
+            }
+          });
         }
       });
     }
