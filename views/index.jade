@@ -3,4 +3,38 @@ html
     include bootstrap
     link(rel='stylesheet', href='/stylesheets/index.css')
   body
-    p #{user.email}
+    div.container
+      nav.navbar.navbar-default(role='navigation')
+        a.navbar-brand(href='/') #{user.businessName}
+        button.btn.btn-default#logoutButton Log out
+      div.row#mainRow
+        div.col-md-7#orderDashboardColumn
+          div.row
+            div.col-md-12
+              h2 Active Orders
+          for order in orders
+            div.row
+              div.col-md-3
+                p #{order.orderNumber}
+              div.col-md-3
+                p #{order.phoneNumber}
+              div.col-md-3
+                button.btn.btn-primary Text
+        div.col-md-5#createOrderColumn
+          div.row
+            div.col-md-12
+              h2 Create Order
+          div.row
+            div.col-md-12
+              div.form-group
+                label(for='inputOrderNumber') Order Number
+                input.form-control#inputOrderNumber(type='text', placeholder='Order Number', name='orderNumber')
+          div.row
+            div.col-md-12
+              div.form-group
+                label(for='inputPhoneNumber') Phone Number
+                input.form-control#inputPhoneNumber(type='text', placeholder='Phone Number', name='phoneNumber')
+          div.row
+            div.col-md-12
+              button.btn.btn-primary#createOrderButton Create Order
+  script(type='text/javascript', src='/javascripts/index.js')
