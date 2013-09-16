@@ -4,7 +4,7 @@ var mongooseModels = require('./MongooseModels');
 var User = mongooseModels.User;
 
 exports.findUserById = function(id, callback) {
-  User.findOne({id: id}, function(err, user) {
+  User.findOne({_id: id}, function(err, user) {
     if(err) {
       callback(err);
     }

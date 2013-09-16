@@ -17,7 +17,7 @@ app.set('view engine', 'jade');
 app.use(express.favicon());
 app.use(express.logger('dev'));
 app.use(express.bodyParser());
-app.use(express.cookieParser());
+app.use(express.cookieParser('secret'));
 app.use(express.methodOverride());
 app.use(express.session({secret: 'test'}));
 app.use(passport.initialize());
@@ -38,7 +38,7 @@ if (process.env.NODE_ENV === 'development') {
 mongoose.connect(process.env.mongooseURL);
 
 passport.serializeUser(function(user, callback) {
-  callback(null, user.id);
+  callback(null, user._id);
 });
 
 passport.deserializeUser(function(id, callback) {
