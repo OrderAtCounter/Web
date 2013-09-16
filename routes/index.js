@@ -37,7 +37,14 @@ exports.createAccount = function(req, res) {
               }
               else {
                 var sessionId = returnedSession._id;
-                res.send(200, {'sessionId': sessionId});
+                req.login(returnedUser, function(err) {
+                  if(err) {
+                    res.send(500, 'Error logging in after creating account.');
+                  }
+                  else {
+                    res.redirect('/');
+                  }
+                });
               }
             });
           }

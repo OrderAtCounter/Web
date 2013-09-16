@@ -7,7 +7,7 @@ html
       div.row
         div.col-md-4#titleColumn
           h1 Create Account
-      form(role='form', method='POST', action='/createAccount')
+      form(role='form', method='POST', action='/createAccount')#createAccountForm
         div.row
           div.col-md-4
             div.form-group
@@ -30,4 +30,5 @@ html
               input.form-control(type='password', id='inputConfirmPassword', placeholder='Confirm password', name='confirmPassword')
         div.row
           div.col-md-4
-            button.btn.btn-primary Create Account
+            button.btn.btn-primary#createAccountButton Create Account
+  script(type='text/javascript', src='/javascripts/createAccount.js')
