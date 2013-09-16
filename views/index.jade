@@ -3,4 +3,14 @@ html
     include bootstrap
     link(rel='stylesheet', href='/stylesheets/index.css')
   body
-    p #{user.email}
+    div.container
+      nav.navbar.navbar-default(role='navigation')
+        a.navbar-brand #{user.businessName}
+      div#ordersGroup
+        div.row
+          div.col-md-8
+            h2 Active Orders
+          div.col-md-4
+            button.btn.btn-primary#createOrderButton Create Order
+  script(type='text/javascript', src='/javascripts/index.js')
+  script(type='text/javascript', src='/javascripts/Order.js')
