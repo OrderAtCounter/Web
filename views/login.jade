@@ -1,0 +1,24 @@
+html
+  head
+    include bootstrap
+    link(rel='stylesheet', href='/stylesheets/login.css')
+  body
+    div.container
+      div.row
+        div.col-md-4#titleColumn
+          h1 Log in
+      form(role='form', method='POST', action='/loginUser')#loginForm
+        div.row
+          div.col-md-4
+            div.form-group
+              label(for='inputEmail') Email Address
+              input.form-control(type='email', id='inputEmail', placeholder='Enter email', name='email')
+        div.row
+          div.col-md-4
+            div.form-group
+              label(for='inputPassword') Password
+              input.form-control(type='password', id='inputPassword', placeholder='Enter password', name='password')
+        div.row
+          div.col-md-4
+            button.btn.btn-primary#loginButton Log in
+  script(type='text/javascript', src='/javascripts/login.js')

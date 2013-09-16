@@ -54,9 +54,38 @@ exports.createAccount = function(req, res) {
   }
 }
 
+/* POST for logging in */
+exports.login = function(req, res) {
+  var email = req.body['email'];
+  var password = req.body['password'];
+  User.findOne({email: email}, function(err, user) {
+    if(err) {
+      res.send(500, 'Error while finding user.');
+    }
+    else if(!user) {
+      res.send(500, 'User does not exist with that email.');
+    }
+    else {
+      req.login(user, function(err) {
+        if(err) {
+          res.send(500, 'Error logging in.');
+        }
+        else {
+          res.redirect('/');
+        }
+      });
+    }
+  });
+}
+
 /* GET for creating acount */
 exports.getCreateAccount = function(req, res) {
   res.render('createAccount');
+}
+
+/* GET for logging in */
+exports.getLogin = function(req, res) {
+  res.render('login');
 }
 
 /* GET for index */
