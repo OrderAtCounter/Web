@@ -76,16 +76,11 @@ passport.use(new LocalStrategy(
 /* Web GET routes */
 app.get('/', webRoutes.getIndex);
 app.get('/createAccount', webRoutes.getCreateAccount);
+app.get('/login', webRoutes.getLogin);
 
 /* Web POST routes */
 app.post('/createAccount', webRoutes.createAccount);
-
-app.post('/login',
-  passport.authenticate('local', {failureRedirect: '/login'}),
-  function(req, res) {
-    res.redirect('/');
-  }
-);
+app.post('/loginUser', webRoutes.login);
 
 /* iOS GET Routes */
 

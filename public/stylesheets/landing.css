@@ -1,0 +1,41 @@
+#accountColumn {
+  float: right;
+  height: 600px;
+}
+
+#descriptiveColumn {
+  height: 600px;
+}
+
+div#branding {
+  border: 1px solid;
+  width: 500px;
+  height: 150px;
+  margin: 0 auto;
+  float: none;
+}
+
+div#procedure {
+  width: 500px;
+  height: 200px;
+  margin-left: 75px;
+  margin-top: 50px;
+}
+
+div#mainRow {
+  margin-top: 50px;
+}
+
+#loginButton {
+  width: 250px;
+  height: 50px;
+}
+
+#createAccountButton {
+  width: 250px;
+  height: 50px;
+}
+
+#callToAction {
+  margin-top: 150px;
+}
