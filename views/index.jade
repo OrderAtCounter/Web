@@ -1,4 +1,6 @@
-if user
-  p #{user.email}
-else
-  p No user
+html
+  head
+    include bootstrap
+    link(rel='stylesheet', href='/stylesheets/index.css')
+  body
+    p #{user.email}
