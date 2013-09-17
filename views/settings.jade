@@ -1,0 +1,10 @@
+html
+  head
+    include bootstrap
+    link(rel='stylesheet', href='/stylesheets/settings.css')
+  body
+    div.container
+      nav.navbar.navbar-default(role='navigation')
+        a.navbar-brand(href='/') #{user.businessName}
+        button.btn.btn-default#logoutButton Log out
+  script(type='text/javascript', src='/javascripts/settings.jade')

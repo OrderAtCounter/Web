@@ -167,3 +167,13 @@ exports.getIndex = function(req, res) {
     res.render('landing');
   }
 }
+
+/* GET for settings */
+exports.getSettings = function(req, res) {
+  if(req.user) {
+    res.render('settings', {user: req.user});
+  }
+  else {
+    res.send(403);
+  }
+}
