@@ -79,6 +79,7 @@ app.get('/', webRoutes.getIndex);
 app.get('/createAccount', webRoutes.getCreateAccount);
 app.get('/login', webRoutes.getLogin);
 app.get('/logout', webRoutes.getLogout);
+app.get('/settings', ensureAuthenticated, webRoutes.getSettings);
 
 /* Web POST routes */
 app.post('/createAccount', webRoutes.createAccount);
