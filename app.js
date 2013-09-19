@@ -12,21 +12,9 @@ var express = require('express')
 
 var app = express();
 
-app.set('port', process.env.PORT || 3000);
-app.set('views', __dirname + '/views');
-app.set('view engine', 'jade');
-app.use(express.favicon());
-app.use(express.logger('dev'));
-app.use(express.bodyParser());
-app.use(express.cookieParser('secret'));
-app.use(express.methodOverride());
-app.use(express.session({secret: 'test', store: new RedisStore}));
-app.use(passport.initialize());
-app.use(passport.session());
-app.use(app.router);
-app.use(express.static(path.join(__dirname, 'public')));
+var redisOptions = {};
 
-if (process.env.NODE_ENV === 'development') {
+if(process.env.NODE_ENV === 'development') {
   app.use(express.errorHandler());
   var envFile = fs.readFileSync('./.env', 'utf-8');  
   envFile = envFile.split('\n');
@@ -35,6 +23,31 @@ if (process.env.NODE_ENV === 'development') {
     process.env[variable[0]] = variable[1];
   }
 }
+
+else if(process.env.NODE_ENV === 'production') {
+  redisOptions.pass = process.env.redisPass;
+}
+
+else {
+  
+}
+
+redisOptions.host = process.env.redisHost;
+redisOptions.port = process.env.redisPort;
+
+app.set('port', process.env.PORT || 3000);
+app.set('views', __dirname + '/views');
+app.set('view engine', 'jade');
+app.use(express.favicon());
+app.use(express.logger('dev'));
+app.use(express.bodyParser());
+app.use(express.cookieParser('secret'));
+app.use(express.methodOverride());
+app.use(express.session({secret: 'test', store: new RedisStore(redisOptions)}));
+app.use(passport.initialize());
+app.use(passport.session());
+app.use(app.router);
+app.use(express.static(path.join(__dirname, 'public')));
 
 mongoose.connect(process.env.mongooseURL);
 
