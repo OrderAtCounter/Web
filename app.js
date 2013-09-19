@@ -12,7 +12,8 @@ var express = require('express')
 
 var app = express();
 
-if(process.env.NODE_ENV !== 'development') {
+if(process.env.NODE_ENV === 'production') {
+  console.log('[NODE_ENV IS PRODUCTION]');
   var redisOptions = {
     host: 'dory.redistogo.com',
     port: 10573,
@@ -21,7 +22,8 @@ if(process.env.NODE_ENV !== 'development') {
 }
 else {
   var redisOptions = {
-    host: '127.0.0.1'
+    host: '127.0.0.1',
+    port: 6379
   }
 }
 
