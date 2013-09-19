@@ -12,7 +12,7 @@ Type: POST
 email  
 password  
 #####Example Data
-{email: 'chris.amavisca@gmail.com's, password: 'TestPassword'} 
+{email: 'chris.amavisca@gmail.com', password: 'TestPassword'} 
 #####Success Response
 Status Code: 200, sessionId 
 
