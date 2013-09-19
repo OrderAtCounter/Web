@@ -12,6 +12,19 @@ var express = require('express')
 
 var app = express();
 
+if(process.env.NODE_ENV !== 'development') {
+  var redisOptions = {
+    host: 'dory.redistogo.com',
+    port: 10573,
+    pass: '9c295b798f47b76935356bbc1860a611'
+  }
+}
+else {
+  var redisOptions = {
+    host: '127.0.0.1'
+  }
+}
+
 app.set('port', process.env.PORT || 3000);
 app.set('views', __dirname + '/views');
 app.set('view engine', 'jade');
@@ -20,7 +33,7 @@ app.use(express.logger('dev'));
 app.use(express.bodyParser());
 app.use(express.cookieParser('secret'));
 app.use(express.methodOverride());
-app.use(express.session({secret: 'test', store: new RedisStore}));
+app.use(express.session({secret: 'test', store: new RedisStore(redisOptions)}));
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(app.router);
