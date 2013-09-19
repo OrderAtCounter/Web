@@ -12,20 +12,28 @@ var express = require('express')
 
 var app = express();
 
-if(process.env.NODE_ENV === 'production') {
-  console.log('[NODE_ENV IS PRODUCTION]');
-  var redisOptions = {
-    host: 'dory.redistogo.com',
-    port: 10573,
-    pass: '9c295b798f47b76935356bbc1860a611'
+var redisOptions = {};
+
+if(process.env.NODE_ENV === 'development') {
+  app.use(express.errorHandler());
+  var envFile = fs.readFileSync('./.env', 'utf-8');  
+  envFile = envFile.split('\n');
+  for(var i = 0; i < envFile.length; i++) {
+    var variable = envFile[i].split('=');
+    process.env[variable[0]] = variable[1];
   }
 }
+
+else if(process.env.NODE_ENV === 'production') {
+  redisOptions.pass = process.env.redisPass;
+}
+
 else {
-  var redisOptions = {
-    host: '127.0.0.1',
-    port: 6379
-  }
+  
 }
+
+redisOptions.host = process.env.redisHost;
+redisOptions.port = process.env.redisPort;
 
 app.set('port', process.env.PORT || 3000);
 app.set('views', __dirname + '/views');
@@ -40,16 +48,6 @@ app.use(passport.initialize());
 app.use(passport.session());
 app.use(app.router);
 app.use(express.static(path.join(__dirname, 'public')));
-
-if (process.env.NODE_ENV === 'development') {
-  app.use(express.errorHandler());
-  var envFile = fs.readFileSync('./.env', 'utf-8');  
-  envFile = envFile.split('\n');
-  for(var i = 0; i < envFile.length; i++) {
-    var variable = envFile[i].split('=');
-    process.env[variable[0]] = variable[1];
-  }
-}
 
 mongoose.connect(process.env.mongooseURL);
 
