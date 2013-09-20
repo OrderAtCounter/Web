@@ -109,6 +109,7 @@ exports.removeOrder = function(req, res) {
   var sessionId = req.body['sessionId'];
   var email = req.body['email'];
   var orderNumber = req.body['orderNumber'];
+  console.log(sessionId, email, orderNumber);
   Session.findOne({_id: sessionId, email: email}, function(err, session) {
     if(err) {
       res.send(500, 'Database/Server error finding the session.');
