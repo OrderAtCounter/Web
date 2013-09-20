@@ -14,10 +14,6 @@ $('#createOrderButton').click(function() {
   })  
 });
 
-$('#logoutButton').click(function() {
-  window.location = '/logout';
-});
-
 $('#inputOrderNumber').focus();
 
 $('#createOrderColumn').keypress(function(e) {

@@ -88,7 +88,7 @@ exports.createOrder = function(req, res) {
                   res.send(500, 'Database/Server error saving the user.');
                 }
                 else {
-                  res.send(200);
+                  res.json({orderNumber: orderNumber});
                 }
               });
             }
@@ -96,6 +96,49 @@ exports.createOrder = function(req, res) {
               res.send(500, 'User does not exist.');
             }
           });
+        }
+      });
+    }
+    else {
+      res.send(500, 'Session does not exist. Email may or may not be correct. No guarantees on server end on which was wrong.');
+    }
+  });
+}
+
+exports.removeOrder = function(req, res) {
+  var sessionId = req.body['sessionId'];
+  var email = req.body['email'];
+  var orderNumber = req.body['orderNumber'];
+  Session.findOne({_id: sessionId, email: email}, function(err, session) {
+    if(err) {
+      res.send(500, 'Database/Server error finding the session.');
+    }
+    else if(session) {
+      User.findOne({email: email}, function(err, user) {
+        if(err) {
+          res.send(500, 'Database/Server error finding the user.');
+        }
+        else if(user) {
+          Order.findOne({_id: {$in: user.Orders}, orderNumber: orderNumber}, function(err, order) {
+            if(err) {
+              res.send(500, 'Error finding order to remove.');
+            }
+            else {
+              var index = user.Orders.indexOf(order._id);
+              user.Orders.splice(index, 1);
+              user.save(function(err) {
+                if(err) {
+                  res.send(500, 'Error saving user.');
+                }
+                else {
+                  res.send(200);
+                }
+              });
+            }
+          });
+        }
+        else {
+          res.send(500, 'User does not exist.');
         }
       });
     }

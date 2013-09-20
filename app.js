@@ -24,7 +24,7 @@ if(process.env.NODE_ENV === 'development') {
   }
 }
 
-else if(process.env.NODE_ENV === 'production') {
+else if(process.env.NODE_ENV === 'production') { 
   redisOptions.pass = process.env.redisPass;
 }
 
@@ -99,12 +99,11 @@ app.post('/createAccount', webRoutes.createAccount);
 app.post('/loginUser', webRoutes.login);
 app.post('/createOrder', ensureAuthenticated, webRoutes.createOrder);
 
-/* iOS GET Routes */
-
 /* iOS POST Routes */
 app.post('/iOSLogin', iOSRoutes.login);
 app.post('/iOSLogout', iOSRoutes.logout);
 app.post('/iOSOrder', iOSRoutes.createOrder);
+app.post('/iOSRemoveOrder', iOSRoutes.removeOrder);
 
 http.createServer(app).listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));
