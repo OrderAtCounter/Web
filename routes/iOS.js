@@ -9,6 +9,7 @@ var Order = mongooseModels.Order;
 exports.login = function(req, res) {
   var email = req.body['email'];
   var password = req.body['password'];
+  console.log(req.body);
   User.findOne({email: email}, function(err, user) {
     if(err) {
       res.send(500, 'There was an error in searching through the User collection for a user.')

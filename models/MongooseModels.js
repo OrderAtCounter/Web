@@ -6,7 +6,9 @@ var UserSchema = new Schema({
   password: String,
   businessName: String,
   Orders: [{type: String, ref: 'Order'}],
-  completedOrders: [{type: String, ref: 'Order'}]
+  settings: {
+    message: String
+  }
 });
 
 var SessionSchema = new Schema({
