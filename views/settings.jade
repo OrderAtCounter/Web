@@ -6,45 +6,8 @@ html
   body
     div.container
       include nav
-      div.row
-        div.col-md-4#titleColumn
-          h1 Settings
-      div#settingsForm
-        div.row
-          div.col-md-4
-            div.form-group.accountSettings
-              label(for='inputEmail') Email Address
-              p #{user.email}
-              input(type='text').accountInputs.form-control.hidden#emailInput #{user.email}
-        div.row
-          div.col-md-4
-            div.form-group.accountSettings
-              label(for='inputBusinessName') Business Name
-              p #{user.businessName}
-              input(type='text').form-control.accountInputs.hidden#businessNameInput #{user.businessName}
-        div.row#editButtonRow
-          div.col-md-4
-            button.btn.btn-primary#editAccountButton Edit
-        div.row.fade#alertMessage
-          div.col-md-4
-            div.alert
-              <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-      div#payment-form
-        span.payment-errors
-        div.form-row
-          label
-            span Card Number
-            input(type='text', data-stripe='number')
-        div.form-row
-          label
-            span CVC
-            input(type='text', data-stripe='cvc')
-        div.form-row
-          label
-            span Expiration (MM/YYYY)
-            input(type='text', data-stripe='exp-month')
-          span /
-          input(type='text', data-stripe='exp-year')
-        button#submitPay Create Subscription
+      include accountSettings
+      include messageSettings
+      include planSettings
   script(type='text/javascript', src='/javascripts/settings.js')
   script(type='text/javascript', src='/javascripts/nav.js')

@@ -99,6 +99,7 @@ app.post('/createAccount', webRoutes.createAccount);
 app.post('/loginUser', webRoutes.login);
 app.post('/createOrder', ensureAuthenticated, webRoutes.createOrder);
 app.post('/settings', ensureAuthenticated, webRoutes.updateAccountSettings);
+app.post('/messageSettings', ensureAuthenticated, webRoutes.updateMessageSettings);
 app.post('/addSubscription', ensureAuthenticated, webRoutes.addSubscription);
 
 /* iOS POST Routes */

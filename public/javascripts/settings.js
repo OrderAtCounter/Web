@@ -71,6 +71,48 @@ $('#editAccountButton').click(function() {
   }
 });
 
-var notify = function(message, type, duration) {
+var editMessageState = false;
 
-}
+$('#editMessageButton').click(function() {
+  var uneditable = $('#customMessageP');
+  var editable = $('#customMessageTextarea');
+  if(!editMessageState) {
+    var text = $(uneditable).text();
+    $(editable).val(text);
+    $(this).removeClass('btn-primary');
+    $(this).addClass('btn-success');
+    $(this).text('Save');
+    $(uneditable).addClass('hidden');
+    $(editable).removeClass('hidden');
+    editMessageState = true;
+  }
+  else {
+    $(this).removeClass('btn-success');
+    $(this).addClass('btn-primary');
+    $(this).text('Edit');
+    var text = $(editable).val();
+    $(uneditable).text(text);
+    $(uneditable).removeClass('hidden');
+    $(editable).addClass('hidden');
+    editMessageState = false;
+    var data = {message: text};
+    $('#alertMessage2').children('div').children('div').children('p').remove();
+    $.ajax({
+      url: '/messageSettings',
+      method: 'POST',
+      data: data,
+      success: function() {
+        var alertDiv = $('#alertMessage2').children('div').children('div');
+        alertDiv.append('<p>Custom Message saved successfully!</p>');
+        alertDiv.addClass('alert-success');
+        $('#alertMessage2').addClass('in');
+      },
+      error: function() {
+        var alertDiv = $('#alertMessage2').children('div').children('div');
+        alertDiv.append('<p>Error saving custom message!</p>');
+        alertDiv.addClass('alert-danger');
+        $('#alertMessage2').addClass('in');
+      }
+    });
+  }
+});

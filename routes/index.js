@@ -146,6 +146,22 @@ exports.updateAccountSettings = function(req, res) {
   });
 }
 
+/* POST for updating message settings */
+exports.updateMessageSettings = function(req, res) {
+  var user = req.user;
+  var message = req.body['message'];
+  user.settings.message = message;
+  user.save(function(err) {
+    if(err) {
+      res.send(500, 'Error updating message settings.');
+    }
+    else {
+      var data = {message: message};
+      res.json(data);
+    }
+  });
+}
+
 exports.addSubscription = function(req, res) {
   var id = req.body['id'];
   stripe.customers.create({

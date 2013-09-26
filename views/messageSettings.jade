@@ -1,0 +1,17 @@
+div.row
+  div.col-md-12#customMessageTitle
+    h1 Custom Text Message
+div#settingsForm
+  div.row
+    div.col-md-4
+      div.form-group.messageSettings
+        label(for='inputMessage') Custom Message
+        p#customMessageP #{user.settings.message}
+        textarea.col-md-12.hidden#customMessageTextarea
+  div.row#editMessageRow
+    div.col-md-4
+      button.btn.btn-primary#editMessageButton Edit
+  div.row.fade#alertMessage2
+      div.col-md-4
+        div.alert
+          <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>

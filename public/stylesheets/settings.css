@@ -14,3 +14,9 @@
 .fade.in {
   opacity: 1;
 }
+
+#customMessageTextarea {
+  width: 500px;
+  height: 200px;
+  display: block;
+}
