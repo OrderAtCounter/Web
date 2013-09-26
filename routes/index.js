@@ -128,6 +128,24 @@ exports.removeOrder = function(req, res) {
   });
 }
 
+/* POST for updating account settings */
+exports.updateAccountSettings = function(req, res) {
+  var user = req.user;
+  var email = req.body['email'];
+  var businessName = req.body['businessName'];
+  user.email = email;
+  user.businessName = businessName;
+  user.save(function(err) {
+    if(err) {
+      res.send(500, 'Error updating account.');
+    }
+    else {
+      var data = {businessName: businessName, email: email};
+      res.json(data);
+    }
+  });
+}
+
 exports.addSubscription = function(req, res) {
   var id = req.body['id'];
   stripe.customers.create({
