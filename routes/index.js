@@ -4,6 +4,8 @@ var mongooseModels = require('../models/MongooseModels');
 var User = mongooseModels.User;
 var Session = mongooseModels.Session;
 var Order = mongooseModels.Order;
+var api_key = process.env.STRIPE_TEST_KEY;
+var stripe = require('stripe')(api_key);
 
 /* POST for creating account */
 exports.createAccount = function(req, res) {
@@ -117,6 +119,29 @@ exports.removeOrder = function(req, res) {
       user.save(function(err) {
         if(err) {
           res.send(500, 'Error saving user.');
+        }
+        else {
+          res.send(200);
+        }
+      });
+    }
+  });
+}
+
+exports.addSubscription = function(req, res) {
+  var id = req.body['id'];
+  stripe.customers.create({
+    email: req.user.email
+  }, function(err, customer) {
+    if(err) {
+      console.log(err);
+    }  
+    else {
+      stripe.customers.update_subscription(customer.id, {
+        plan: 1
+      }, function(err) {
+        if(err) {
+          console.log(err);
         }
         else {
           res.send(200);

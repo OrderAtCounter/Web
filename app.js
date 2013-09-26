@@ -98,6 +98,7 @@ app.get('/settings', ensureAuthenticated, webRoutes.getSettings);
 app.post('/createAccount', webRoutes.createAccount);
 app.post('/loginUser', webRoutes.login);
 app.post('/createOrder', ensureAuthenticated, webRoutes.createOrder);
+app.post('/addSubscription', ensureAuthenticated, webRoutes.addSubscription);
 
 /* iOS POST Routes */
 app.post('/iOSLogin', iOSRoutes.login);
