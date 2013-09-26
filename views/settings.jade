@@ -20,22 +20,22 @@ html
             div.form-group
               label(for='inputBusinessName') Business Name
               input.form-control(type='text', id='inputBusinessName', name='businessName', value='#{user.businessName}')
-        div#payment-form
-          span.payment-errors
-          div.form-row
-            label
-              span Card Number
-              input(type='text', data-stripe='number')
-          div.form-row
-            label
-              span CVC
-              input(type='text', data-stripe='cvc')
-          div.form-row
-            label
-              span Expiration (MM/YYYY)
-              input(type='text', data-stripe='exp-month')
-            span /
-            input(type='text', data-stripe='exp-year')
-          button#submitPay Create Subscription
+      div#payment-form
+        span.payment-errors
+        div.form-row
+          label
+            span Card Number
+            input(type='text', data-stripe='number')
+        div.form-row
+          label
+            span CVC
+            input(type='text', data-stripe='cvc')
+        div.form-row
+          label
+            span Expiration (MM/YYYY)
+            input(type='text', data-stripe='exp-month')
+          span /
+          input(type='text', data-stripe='exp-year')
+        button#submitPay Create Subscription
   script(type='text/javascript', src='/javascripts/settings.js')
   script(type='text/javascript', src='/javascripts/nav.js')

@@ -133,21 +133,18 @@ exports.addSubscription = function(req, res) {
   stripe.customers.create({
     email: req.user.email
   }, function(err, customer) {
-    if(err) {
-      console.log(err);
-    }  
-    else {
-      stripe.customers.update_subscription(customer.id, {
-        plan: 1
-      }, function(err) {
-        if(err) {
-          console.log(err);
-        }
-        else {
-          res.send(200);
-        }
-      });
-    }
+    stripe.customers.update_subscription(customer.id, {
+      plan: 1,
+      card: id
+    }, function(err) {
+      if(err) {
+        console.log(err);
+        res.send(500)
+      }
+      else {
+        res.send(200);
+      }
+    });
   });
 }
 
