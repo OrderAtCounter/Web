@@ -7,7 +7,8 @@ var UserSchema = new Schema({
   businessName: String,
   Orders: [{type: String, ref: 'Order'}],
   settings: {
-    message: String
+    message: String,
+    plan: String
   }
 });
 

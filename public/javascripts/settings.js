@@ -47,7 +47,6 @@ $('#editAccountButton').click(function() {
     var email = $('#emailInput').val();
     var businessName = $('#businessNameInput').val();
     var data = {email: email, businessName: businessName};
-    $('#alertMessage').children('div').children('div').children('p').remove();
     $.ajax({
       url: '/settings',
       method: 'POST',
@@ -56,16 +55,8 @@ $('#editAccountButton').click(function() {
         var updatedEmail = response.email;
         var updatedBusinessName = response.businessName;
         $('a.navbar-brand').text(updatedBusinessName);
-        var alertDiv = $('#alertMessage').children('div').children('div');
-        alertDiv.append('<p>Settings saved successfully!');
-        alertDiv.addClass('alert-success');
-        $('#alertMessage').addClass('in');
       },
       error: function() {
-        var alertDiv = $('#alertMessage').children('div').children('div');
-        alertDiv.append('<p>Error saving settings!</p>');
-        alertDiv.addClass('alert-danger');
-        $('#alertMessage').addClass('in');
       }
     });
   }
@@ -96,22 +87,13 @@ $('#editMessageButton').click(function() {
     $(editable).addClass('hidden');
     editMessageState = false;
     var data = {message: text};
-    $('#alertMessage2').children('div').children('div').children('p').remove();
     $.ajax({
       url: '/messageSettings',
       method: 'POST',
       data: data,
       success: function() {
-        var alertDiv = $('#alertMessage2').children('div').children('div');
-        alertDiv.append('<p>Custom Message saved successfully!</p>');
-        alertDiv.addClass('alert-success');
-        $('#alertMessage2').addClass('in');
       },
       error: function() {
-        var alertDiv = $('#alertMessage2').children('div').children('div');
-        alertDiv.append('<p>Error saving custom message!</p>');
-        alertDiv.addClass('alert-danger');
-        $('#alertMessage2').addClass('in');
       }
     });
   }

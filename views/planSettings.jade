@@ -1,6 +1,12 @@
 div.row
   div.col-md-12#cardSettingsTitle
     h1 Plan
+div.row
+  div.col-md-12#planTitle
+    if user.settings.plan === undefined
+      h3 You are not enrolled in a plan!
+    else
+      h3 You are enrolled in #{user.settings.plan}
 div#payment-form
   div.form-row
     label

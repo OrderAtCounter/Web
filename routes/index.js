@@ -206,6 +206,22 @@ exports.getIndex = function(req, res) {
         res.send(500, 'Error finding orders.');
       }
       else {
+        orders = orders.map(function(order) {
+          var timestamp = order._id.getTimestamp();
+          var milliseconds = Date.parse(timestamp);
+          var date = new Date();
+          date.setTime(milliseconds);
+          var hour = date.getHours();
+          var minute = date.getMinutes();
+          var second = date.getSeconds();
+          var AM = 'AM';
+          if((hour > 12) || ((hour === 12) && (minute >= 0)) || ((hour === 12) && (second >= 0))) {
+            hour = hour - 12;
+            AM = 'PM';
+          }
+          order.timestamp = hour + ':' + minute + ' ' + AM;
+          return order;
+        });
         res.render('index', {user: req.user, orders: orders});
       }
     });
