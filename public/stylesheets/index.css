@@ -10,3 +10,7 @@
   float: right;
   height: 600px;
 }
+
+#orderRow {
+  margin-top: 15px;
+}
