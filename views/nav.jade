@@ -1,7 +1,17 @@
-nav.navbar.navbar-default#navBar(role='navigation')
-  div#navWrap
-    a.navbar-brand(href='/') READY
-      span.glyphicon.glyphicon-star
-    div#companyNav
-      div#companyNameNav #{user.businessName}
+nav.navbar.navbar-default(role='navigation')
+  div.container
+    a(href='/').navbar-brand Ready
+      span.glyphicon.glyphicon.search
+    div.navbar-right.hidden-xs
+      div #{user.businessName}
       a(href='/settings') Settings
+    button(type='button', data-toggle='collapse', data-target='.navbar-mobile').navbar-toggle.collapsed.navbar-right
+      span.icon-bar
+      span.icon-bar
+      span.icon-bar
+  div.navbar-mobile.collapse
+    ul.nav.navbar-nav
+      li
+        a(href='/') Ready
+      li
+        a(href='/settings') Settings
