@@ -1,0 +1,17 @@
+#navWrap {
+  margin: 0 auto;
+  width: 1170px;
+}
+
+#navBar {
+  height: 100px;
+}
+
+#companyNav {
+  margin-left: 1000px;
+}
+
+#companyNav div, a{
+  display: block;
+  text-align: right;
+}

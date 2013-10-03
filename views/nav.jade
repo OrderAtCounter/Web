@@ -1,4 +1,7 @@
-nav.navbar.navbar-default(role='navigation')
-  a.navbar-brand(href='/') #{user.businessName}
-  button.btn.btn-default#logoutButton Log out
-  a(href='/settings') Settings
+nav.navbar.navbar-default#navBar(role='navigation')
+  div#navWrap
+    a.navbar-brand(href='/') READY
+      span.glyphicon.glyphicon-star
+    div#companyNav
+      div#companyNameNav #{user.businessName}
+      a(href='/settings') Settings
