@@ -11,9 +11,11 @@ html
             div.col-md-12
               h2 Active Orders
           for order in orders
-            div.row
+            div.row#orderRow
               div.col-md-3
                 p #{order.orderNumber}
+              div.col-md-3
+                p #{order.timestamp}
               div.col-md-3
                 p #{order.phoneNumber}
               div.col-md-3

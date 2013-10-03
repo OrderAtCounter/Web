@@ -1,0 +1,22 @@
+.accountInputs {
+  display: block;
+  width: 300px;
+}
+
+.fade {
+  opacity: 0;
+  -webkit-transition: opacity .5s linear;
+  -moz-transition: opacity 0.5s linear;
+  -o-transition: opacity 0.5s linear;
+  transition: opacity 0.5s linear;
+}
+
+.fade.in {
+  opacity: 1;
+}
+
+#customMessageTextarea {
+  width: 500px;
+  height: 200px;
+  display: block;
+}
