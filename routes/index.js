@@ -10,6 +10,7 @@ var stripe = require('stripe')(api_key);
 /* POST for creating account */
 exports.createAccount = function(req, res) {
   var email = req.body['email'];
+  email = email.toLowerCase();
   var password = req.body['password'];
   var confirmPassword = req.body['confirmPassword'];
   var businessName = req.body['businessName'];
@@ -49,6 +50,7 @@ exports.createAccount = function(req, res) {
 /* POST for logging in */
 exports.login = function(req, res) {
   var email = req.body['email'];
+  email = email.toLowerCase();
   var password = req.body['password'];
   User.findOne({email: email}, function(err, user) {
     if(err) {
