@@ -5,7 +5,6 @@ var UserSchema = new Schema({
   email: String,
   password: String,
   businessName: String,
-  Orders: [{type: String, ref: 'Order'}],
   settings: {
     message: String,
     plan: String
@@ -20,7 +19,8 @@ var SessionSchema = new Schema({
 var OrderSchema = new Schema({
   orderNumber: Number,
   phoneNumber: String,
-  completed: {type: Boolean, default: false}
+  completed: {type: Boolean, default: false},
+  email: String
 });
 
 

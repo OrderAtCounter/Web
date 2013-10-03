@@ -65,43 +65,25 @@ exports.logout = function(req, res) {
 exports.createOrder = function(req, res) {
   var sessionId = req.body['sessionId'];
   var email = req.body['email'];
-  Session.findOne({_id: sessionId, email: email}, function(err, session) {
+  ensureSession(email, sessionId, function(err, session) {
     if(err) {
-      res.send(500, 'Database/Server error finding the session.');
+      res.send(500, 'Error ensuring the session.');
     }
-    else if(session) {
-      var orderNumber = req.body['orderNumber'];
-      var phoneNumber = req.body['phoneNumber'];
-      var order = new Order({orderNumber: orderNumber, phoneNumber: phoneNumber});
-      order.save(function(err, newOrder) {
-        if(err) {
-          res.send(500, 'Database/Server error while saving new order.');
-        }
-        else {
-          User.findOne({email: email}, function(err, user) {
-            if(err) {
-              res.send(500, 'Database/Server error finding the user.');
-            }
-            else if(user) {
-              user.Orders.push(newOrder._id);
-              user.save(function(err) {
-                if(err) {
-                  res.send(500, 'Database/Server error saving the user.');
-                }
-                else {
-                  res.json({orderNumber: orderNumber});
-                }
-              });
-            }
-            else {
-              res.send(500, 'User does not exist.');
-            }
-          });
-        }
-      });
+    else if(!session) {
+      res.send(500, 'Session does not exist.');
     }
     else {
-      res.send(500, 'Session does not exist. Email may or may not be correct. No guarantees on server end on which was wrong.');
+      var orderNumber = req.body['orderNumber'];
+      var phoneNumber = req.body['phoneNumber'];
+      var order = new Order({orderNumber: orderNumber, phoneNumber: phoneNumber, email: email});
+      order.save(function(err, newOrder) {
+        if(err) {
+          res.send(500, 'Database/Server error saving new order.');
+        }
+        else {
+          res.json({orderNumber: orderNumber});
+        }
+      });
     }
   });
 }
@@ -110,42 +92,33 @@ exports.removeOrder = function(req, res) {
   var sessionId = req.body['sessionId'];
   var email = req.body['email'];
   var orderNumber = req.body['orderNumber'];
-  console.log(sessionId, email, orderNumber);
-  Session.findOne({_id: sessionId, email: email}, function(err, session) {
+  ensureSession(email, sessionId, function(err, session) {
     if(err) {
-      res.send(500, 'Database/Server error finding the session.');
+      res.send(500, 'Error ensuring session.');
     }
-    else if(session) {
-      User.findOne({email: email}, function(err, user) {
+    else if(!session) {
+      res.send(500, 'Session does not exist.');
+    }
+    else {
+      Order.remove({orderNumber: orderNumber, email: email}, function(err) {
         if(err) {
-          res.send(500, 'Database/Server error finding the user.');
-        }
-        else if(user) {
-          Order.findOne({_id: {$in: user.Orders}, orderNumber: orderNumber}, function(err, order) {
-            if(err) {
-              res.send(500, 'Error finding order to remove.');
-            }
-            else {
-              var index = user.Orders.indexOf(order._id);
-              user.Orders.splice(index, 1);
-              user.save(function(err) {
-                if(err) {
-                  res.send(500, 'Error saving user.');
-                }
-                else {
-                  res.send(200);
-                }
-              });
-            }
-          });
+          res.send(500, 'Error removing the order.');
         }
         else {
-          res.send(500, 'User does not exist.');
+          res.json({orderNumber: orderNumber});
         }
       });
     }
+  });
+}
+
+var ensureSession = function(email, sessionId, callback) {
+  Session.findOne({_id: sessionId, email: email}, function(err, session) {
+    if(err) {
+      callback(err);
+    }
     else {
-      res.send(500, 'Session does not exist. Email may or may not be correct. No guarantees on server end on which was wrong.');
+      callback(err, session);
     }
   });
 }

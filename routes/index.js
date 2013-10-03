@@ -84,21 +84,13 @@ exports.createOrder = function(req, res) {
       res.send(500, 'Order exists.');
     }
     else {
-      var order = new Order({orderNumber: orderNumber, phoneNumber: phoneNumber});
+      var order = new Order({orderNumber: orderNumber, phoneNumber: phoneNumber, email: user.email});
       order.save(function(err, newOrder) {
         if(err) {
           res.send(500, 'Error saving order.');
         }
         else {
-          user.Orders.push(newOrder._id);
-          user.save(function(err) {
-            if(err) {
-              res.send('Error updating User with new Order.');
-            }
-            else {
-              res.send(200, newOrder);
-            }
-          });
+          res.send(200, newOrder);
         }
       });
     }
@@ -109,21 +101,12 @@ exports.createOrder = function(req, res) {
 exports.removeOrder = function(req, res) {
   var orderNumber = req.body['orderNumber'];
   var user = req.user;
-  Order.findOne({_id: {$in: user.Orders}, orderNumber: orderNumber}, function(err, order) {
+  Order.remove({orderNumber: orderNumber, email: user.email}, function(err) {
     if(err) {
-      res.send(500, 'Error finding order to remove.');
+      res.send(500, 'Error removing order.');
     }
     else {
-      var index = user.Orders.indexOf(order._id);
-      user.Orders.splice(index, 1);
-      user.save(function(err) {
-        if(err) {
-          res.send(500, 'Error saving user.');
-        }
-        else {
-          res.send(200);
-        }
-      });
+      res.send(200);
     }
   });
 }
@@ -201,7 +184,7 @@ exports.getLogout = function(req, res) {
 /* GET for index */
 exports.getIndex = function(req, res) {
   if(req.user) {
-    Order.find({_id: {$in: req.user.Orders}}, function(err, orders) {
+    Order.find({email: req.user.email}, function(err, orders) {
       if(err) {
         res.send(500, 'Error finding orders.');
       }
