@@ -15,7 +15,7 @@ exports.findUserById = function(id, callback) {
 }
 
 exports.findUserByEmail = function(email, callback) {
-  User.findOne({email: email}, function(err, user) {
+  User.findOne({lowerEmail: email.toLowerCase()}, function(err, user) {
     if(err) {
       callback(err);
     }
