@@ -1,0 +1,36 @@
+#navBrand {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 24px;
+  font-weight: bold;
+  color: #EF493A;
+  margin-top: 14px;
+}
+
+#navIcon {
+  margin-left: 10px;
+}
+
+#imageIcon {
+  margin-bottom: 4px;
+}
+
+#mainNav {
+  height: 75px;
+  background-color: #F7F7F5;
+}
+
+#navBusinessName {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 19px;
+  font-weight: bold;
+  color: #000000;
+  margin-bottom: 2px;
+  margin-top: 14px;
+}
+
+#navSettingsLink {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 14px;
+  font-weight: bold;
+  color: #4C4A49;
+}
