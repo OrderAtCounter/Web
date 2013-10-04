@@ -29,7 +29,7 @@ else if(process.env.NODE_ENV === 'production') {
 }
 
 else {
-  
+  console.log('You need to set your process variable to either production or development to load in your environment variables.');
 }
 
 redisOptions.host = process.env.redisHost;

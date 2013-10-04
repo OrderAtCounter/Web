@@ -1,4 +1,18 @@
-nav.navbar.navbar-default(role='navigation')
-  a.navbar-brand(href='/') #{user.businessName}
-  button.btn.btn-default#logoutButton Log out
-  a(href='/settings') Settings
+nav.navbar.navbar-default(role='navigation')#mainNav
+  div.container
+    a(href='/').navbar-brand#navBrand READY
+      span#navIcon
+        img(src='/images/phone-logo.png', alt='phone')#imageIcon
+    div.navbar-right.hidden-xs
+      div#navBusinessName #{user.businessName}
+      a(href='/settings')#navSettingsLink Settings
+    button(type='button', data-toggle='collapse', data-target='.navbar-mobile').navbar-toggle.collapsed.navbar-right
+      span.icon-bar
+      span.icon-bar
+      span.icon-bar
+  div.navbar-mobile.collapse
+    ul.nav.navbar-nav
+      li
+        a(href='/settings') Settings
+      li
+        a(href='/logout') Logout
