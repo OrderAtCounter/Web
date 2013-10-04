@@ -30,6 +30,7 @@
   font-family: 'Montserrat', sans-serif;
   font-size: 14px;
   width: 90%;
+  height: 10%;
   border-radius: 2px;
   border: 1px solid #939598;
 }
@@ -48,9 +49,9 @@
 
 #activeOrdersBox {
   margin-top: 8px;
-  border: 2px solid #939598;
-  min-height: 400px;
   overflow: scroll;
+  max-height: 700px;
+  border-top: 2px solid #939598;
 }
 
 #activeOrdersTitle {
@@ -61,4 +62,83 @@
 
 #activeOrdersColumn {
   padding-left: 0;
+  float: left;
+}
+
+.order {
+  border-bottom: 2px solid #939598;
+  border-left: 2px solid #939598;
+  border-right: 2px solid #939598;
+  height: 80px;
+}
+
+.order:first-child {
+  border-top: none;
+}
+
+.orderNumber {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: bold;
+  font-size: 30px;
+  color: #4C4A49;
+  width: 30%;
+  position: relative;
+  top: 16px;
+  padding-left: 20px;
+}
+
+.orderPhone {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 15px;
+  color: #000000;
+  margin-top: -25px;
+  padding-left: 10px;
+}
+
+.orderTimestamp {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 15px;
+  color: #000000;
+  padding-left: 10px;
+}
+
+.phoneNumber {
+  display: inline;
+  margin-left: 5px;
+  position: relative;
+  top: 2px;
+}
+
+.orderTime {
+  display: inline;
+  margin-left: 5px;
+  position: relative;
+  top: 2px;
+}
+
+.metadata {
+  margin-left: 30%;
+  width: 20%;
+  margin-bottom: 5px;
+  position: relative;
+  bottom: 2px;
+}
+
+.readyButtonDiv {
+  float: right;
+  width: 50%;
+}
+
+.readyButton {
+  width: 60%;
+  height: 40px;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: bold;
+  font-size: 16px;
+  color: #71C2B3;
+  border: 3px solid #71C2B3;
+  background-color: #FFFFFF;
+  position: relative;
+  bottom: 45px;
+  margin-left: 25%;
 }
