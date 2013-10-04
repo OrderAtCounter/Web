@@ -30,6 +30,7 @@
   font-family: 'Montserrat', sans-serif;
   font-size: 14px;
   width: 90%;
+  height: 10%;
   border-radius: 2px;
   border: 1px solid #939598;
 }
@@ -48,9 +49,8 @@
 
 #activeOrdersBox {
   margin-top: 8px;
-  border: 2px solid #939598;
-  min-height: 400px;
   overflow: scroll;
+  max-height: 700px;
 }
 
 #activeOrdersTitle {
@@ -61,4 +61,56 @@
 
 #activeOrdersColumn {
   padding-left: 0;
+  float: left;
+}
+
+.order {
+  border-bottom: 2px solid #939598;
+  border-left: 2px solid #939598;
+  border-right: 2px solid #939598;
+  height: 50%;
+}
+
+.order:first-child {
+  border-top: 2px solid #939598;
+}
+
+.orderNumber {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: bold;
+  font-size: 30px;
+  color: #4C4A49;
+  width: 30%;
+  margin-left: 10px;
+  position: relative;
+  top: 8px;
+}
+
+.orderPhone {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 15px;
+  color: #000000;
+  margin-top: -30px;
+}
+
+.orderTimestamp {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 15px;
+  color: #000000;
+}
+
+.phoneNumber {
+  display: inline;
+  margin-left: 5px;
+}
+
+.orderTime {
+  display: inline;
+  margin-left: 5px;
+}
+
+.metadata {
+  margin-left: 30%;
+  width: 20%;
+  margin-bottom: 5px;
 }

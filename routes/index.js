@@ -203,6 +203,11 @@ exports.getIndex = function(req, res) {
             AM = 'PM';
           }
           order.timestamp = hour + ':' + minute + ' ' + AM;
+
+          var areaCode = order.phoneNumber.slice(0, 3);
+          var firstPhone = order.phoneNumber.slice(3, 6);
+          var secondPhone = order.phoneNumber.slice(6, 10);
+          order.phoneNumber = areaCode + '-' + firstPhone + '-' + secondPhone;
           return order;
         });
         res.render('index', {user: req.user, orders: orders});

@@ -1,3 +1,4 @@
+!!! 5
 html
   head
     include bootstrap
@@ -10,14 +11,22 @@ html
           div#newOrderTitle Add New Order
           div#newOrderBox
             div.newOrderSubtitles New Order Number
-            input.newOrderInputs(type='text', placeholder=' # 1') 
+            input.newOrderInputs#orderInput(type='text', placeholder=' # 1', name='order')
             div.newOrderSubtitles Phone Number
-            input.newOrderInputs(type='text', placeholder=' (404) - 555 - 5555')
+            input.newOrderInputs#phoneNumberInput(type='text', placeholder=' (404) - 555 - 5555', name='phoneNumber')
             button#newOrderButton ADD TO ACTIVE ORDERS
         div.col-md-7.col-xs-12#activeOrdersColumn
           div#activeOrdersTitle Active Orders
           div#activeOrdersBox
-
-              
-  script(type='text/javascript', src='/javascripts/index.js')
-  script(type='text/javascript', src='/javascripts/nav.js')
+            for order in orders
+              div.order
+                div.orderNumber='#' + order.orderNumber
+                div.metadata
+                  div.orderPhone
+                    img(src='/images/phone-number.png', alt='phone')
+                    div.phoneNumber #{order.phoneNumber}
+                  div.orderTimestamp
+                    img.clockImage(src='/images/clock.png', alt='clock')
+                    div.orderTime #{order.timestamp}
+    script(type='text/javascript', src='/javascripts/index.js')
+    script(type='text/javascript', src='/javascripts/nav.js')
