@@ -49,9 +49,8 @@
 
 #activeOrdersBox {
   margin-top: 8px;
-  overflow: scroll;
-  max-height: 700px;
   border-top: 2px solid #939598;
+  margin-bottom: 20px;
 }
 
 #activeOrdersTitle {
@@ -89,4 +88,10 @@
   color: #71C2B3;
   border: 3px solid #71C2B3;
   background-color: #FFFFFF;
+}
+
+.phoneNumber, .phoneTimestamp {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 15px;
+  color: #000000;
 }
