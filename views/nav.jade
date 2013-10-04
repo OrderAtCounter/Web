@@ -5,7 +5,8 @@ nav.navbar.navbar-default(role='navigation')#mainNav
         img(src='/images/phone-logo.png', alt='phone')#imageIcon
     div.navbar-right.hidden-xs
       div#navBusinessName #{user.businessName}
-      a(href='/settings')#navSettingsLink Settings
+      a(href='/settings')
+        div#navSettingsLink Settings
     button(type='button', data-toggle='collapse', data-target='.navbar-mobile').navbar-toggle.collapsed.navbar-right
       span.icon-bar
       span.icon-bar
