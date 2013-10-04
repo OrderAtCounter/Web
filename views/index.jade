@@ -5,37 +5,19 @@ html
   body
     include nav
     div.container
-      div.row#mainRow
-        div.col-md-7#orderDashboardColumn
-          div.row
-            div.col-md-12
-              h2 Active Orders
-          for order in orders
-            div.row#orderRow
-              div.col-md-3
-                p #{order.orderNumber}
-              div.col-md-3
-                p #{order.timestamp}
-              div.col-md-3
-                p #{order.phoneNumber}
-              div.col-md-3
-                button.btn.btn-primary Text
-        div.col-md-5#createOrderColumn
-          div.row
-            div.col-md-12
-              h2 Create Order
-          div.row
-            div.col-md-12
-              div.form-group
-                label(for='inputOrderNumber') Order Number
-                input.form-control#inputOrderNumber(type='text', placeholder='Order Number', name='orderNumber')
-          div.row
-            div.col-md-12
-              div.form-group
-                label(for='inputPhoneNumber') Phone Number
-                input.form-control#inputPhoneNumber(type='text', placeholder='Phone Number', name='phoneNumber')
-          div.row
-            div.col-md-12
-              button.btn.btn-primary#createOrderButton Create Order
+      div.row
+        div.col-md-4.col-xs-12#newOrderColumn
+          div#newOrderTitle Add New Order
+          div#newOrderBox
+            div.newOrderSubtitles New Order Number
+            input.newOrderInputs(type='text', placeholder=' # 1') 
+            div.newOrderSubtitles Phone Number
+            input.newOrderInputs(type='text', placeholder=' (404) - 555 - 5555')
+            button#newOrderButton ADD TO ACTIVE ORDERS
+        div.col-md-7.col-xs-12#activeOrdersColumn
+          div#activeOrdersTitle Active Orders
+          div#activeOrdersBox
+
+              
   script(type='text/javascript', src='/javascripts/index.js')
   script(type='text/javascript', src='/javascripts/nav.js')
