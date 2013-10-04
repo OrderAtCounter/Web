@@ -202,6 +202,10 @@ exports.getIndex = function(req, res) {
             hour = hour - 12;
             AM = 'PM';
           }
+          if(hour == 0) {
+            hour = 12;
+            AM = 'AM';
+          }
           order.timestamp = hour + ':' + minute + ' ' + AM;
 
           var areaCode = order.phoneNumber.slice(0, 3);
