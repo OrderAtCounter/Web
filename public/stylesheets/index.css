@@ -1,16 +1,64 @@
-#mainRow {
-  margin-top: 50px;
+#newOrderTitle {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: bold;
+  font-size: 19px;
 }
 
-#orderDashboardColumn {
-  height: 600px;
-}
-
-#createOrderColumn {
+#newOrderColumn {
+  padding-left: 0;
   float: right;
-  height: 600px;
 }
 
-#orderRow {
-  margin-top: 15px;
+#newOrderBox {
+  margin-top: 8px;
+  border: 2px solid #939598;
+  height: 38%;
+  min-height: 250px;
+}
+
+.newOrderSubtitles {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: bold;
+  font-size: 14px;
+  margin-left: 20px;
+  margin-top: 20px;
+}
+
+.newOrderInputs {
+  margin-left: 20px;
+  margin-top: 20px;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 14px;
+  width: 90%;
+  border-radius: 2px;
+  border: 1px solid #939598;
+}
+
+#newOrderButton {
+  width: 90%;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 16px;
+  margin-top: 20px;
+  height: 20%;
+  margin-left: 20px;
+  background-color: #71C2B3;
+  border: none;
+  color: #FFFFFF;
+}
+
+#activeOrdersBox {
+  margin-top: 8px;
+  border: 2px solid #939598;
+  min-height: 400px;
+  overflow: scroll;
+}
+
+#activeOrdersTitle {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: bold;
+  font-size: 19px;
+}
+
+#activeOrdersColumn {
+  padding-left: 0;
 }
