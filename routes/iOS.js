@@ -9,8 +9,7 @@ var Order = mongooseModels.Order;
 exports.login = function(req, res) {
   var email = req.body['email'];
   var password = req.body['password'];
-  console.log(req.body);
-  User.findOne({email: email}, function(err, user) {
+  User.findOne({lowerEmail: email.toLowerCase()}, function(err, user) {
     if(err) {
       res.send(500, 'There was an error in searching through the User collection for a user.')
     }
@@ -19,7 +18,7 @@ exports.login = function(req, res) {
         res.send(500, 'There is no user with that email.');
       }
       else if(user.password === password) {
-        var session = new Session({email: email, source: 'iOS'});
+        var session = new Session({email: user.email, source: 'iOS'});
         session.save(function(err, returnedSession) {
           if(err) {
             res.send(500, 'There was an error in saving the new session.');
@@ -41,7 +40,7 @@ exports.login = function(req, res) {
 exports.logout = function(req, res) {
   var email = req.body['email'];
   var sessionId = req.body['sessionId'];
-  Session.findOne({_id: sessionId, email: email}, function(err, session) {
+  Session.findOne({_id: sessionId, lowerEmail: email.toLowerCase()}, function(err, session) {
     if(err) {
       res.send(500, 'Database/Server error finding the session.');
     }
@@ -113,7 +112,7 @@ exports.removeOrder = function(req, res) {
 }
 
 var ensureSession = function(email, sessionId, callback) {
-  Session.findOne({_id: sessionId, email: email}, function(err, session) {
+  Session.findOne({_id: sessionId, lowerEmail: email.toLowerCase()}, function(err, session) {
     if(err) {
       callback(err);
     }

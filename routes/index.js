@@ -10,7 +10,6 @@ var stripe = require('stripe')(api_key);
 /* POST for creating account */
 exports.createAccount = function(req, res) {
   var email = req.body['email'];
-  email = email.toLowerCase();
   var password = req.body['password'];
   var confirmPassword = req.body['confirmPassword'];
   var businessName = req.body['businessName'];
@@ -18,7 +17,7 @@ exports.createAccount = function(req, res) {
     res.send(500, 'Passwords do not match.');
   }
   else {
-    User.findOne({email: email}, function(err, user) {
+    User.findOne({lowerEmail: email.toLowerCase()}, function(err, user) {
       if(err) {
         res.send(500, 'There was an error in searching through the User collection for a user.');
       }
@@ -26,7 +25,7 @@ exports.createAccount = function(req, res) {
         res.send(500, 'There is already a user with that username.');
       }
       else {
-        var newUser = new User({email: email, password: password, businessName: businessName});
+        var newUser = new User({email: email, lowerEmail: email.toLowerCase(), password: password, businessName: businessName});
         newUser.save(function(err, returnedUser) {
           if(err) {
             res.send(500, 'There was an error in saving the new user.');
@@ -50,9 +49,8 @@ exports.createAccount = function(req, res) {
 /* POST for logging in */
 exports.login = function(req, res) {
   var email = req.body['email'];
-  email = email.toLowerCase();
   var password = req.body['password'];
-  User.findOne({email: email}, function(err, user) {
+  User.findOne({lowerEmail: email.toLowerCase()}, function(err, user) {
     if(err) {
       res.send(500, 'Error while finding user.');
     }
@@ -78,7 +76,7 @@ exports.createOrder = function(req, res) {
   var phoneNumber = req.body['phoneNumber'];
   phoneNumber = phoneNumber.replace(/\D/g, '');
   var user = req.user;
-  Order.findOne({orderNumber: orderNumber}, function(err, orderExists) {
+  Order.findOne({orderNumber: orderNumber, email: user.email}, function(err, orderExists) {
     if(err) {
       res.send(500, 'Error finding if order exists.');
     }
