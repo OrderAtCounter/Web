@@ -16,6 +16,15 @@
   min-height: 250px;
 }
 
+@media(min-width: 992px) {
+  #newOrderFixed {
+    position: fixed;
+  }
+  #mainContainer {
+    padding-top: 100px;
+  }
+}
+
 .newOrderSubtitles {
   font-family: 'Montserrat', sans-serif;
   font-weight: bold;

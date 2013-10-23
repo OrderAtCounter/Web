@@ -17,6 +17,8 @@
 #mainNav {
   height: 75px;
   background-color: #F7F7F5;
+  position: fixed;
+  width: 100%;
 }
 
 #navBusinessName {
