@@ -209,6 +209,10 @@ exports.getSettings = function(req, res) {
   }
 }
 
+exports.fulfillOrder = function(req, res) {
+  
+}
+
 var convertOrders = function(orders) {
   var convertedOrders = orders.map(function(order) {
     var timestamp = order._id.getTimestamp();
@@ -226,6 +230,9 @@ var convertOrders = function(orders) {
     if(hour == 0) {
       hour = 12;
       AM = 'AM';
+    }
+    if(minute < 10) {
+      minute = '0' + minute;
     }
     order.timestamp = hour + ':' + minute + ' ' + AM;
     var areaCode = order.phoneNumber.slice(0, 3);

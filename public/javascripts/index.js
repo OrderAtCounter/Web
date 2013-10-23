@@ -12,6 +12,35 @@ $('#newOrderButton').click(function() {
       $('#activeOrdersBox').append(order);
       $('.newOrderInputs').val('');
       $('#orderInput').focus();
+      $('.readyButton').click(function() {
+        var orderNumber = $(this).parent().siblings('div').children('.orderNumber').text();
+        orderNumber = orderNumber.slice(1, orderNumber.length);
+        $.ajax({
+          url: '/fulfillOrder',
+          method: 'POST',
+          data: {
+            orderNumber: orderNumber
+          },
+          success: function(data) {
+
+          }
+        });
+      });
+    }
+  });
+});
+
+$('.readyButton').click(function() {
+  var orderNumber = $(this).parent().siblings('div').children('.orderNumber').text();
+  orderNumber = orderNumber.slice(1, orderNumber.length);
+  $.ajax({
+    url: '/fulfillOrder',
+    method: 'POST',
+    data: {
+      orderNumber: orderNumber
+    },
+    success: function(data) {
+
     }
   });
 });

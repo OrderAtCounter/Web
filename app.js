@@ -104,6 +104,7 @@ app.post('/createOrder', ensureAuthenticated, webRoutes.createOrder);
 app.post('/settings', ensureAuthenticated, webRoutes.updateAccountSettings);
 app.post('/messageSettings', ensureAuthenticated, webRoutes.updateMessageSettings);
 app.post('/addSubscription', ensureAuthenticated, webRoutes.addSubscription);
+app.post('/fulfillOrder', ensureAuthenticated, webRoutes.fulfillOrder);
 
 /* iOS POST Routes */
 app.post('/iOSLogin', iOSRoutes.login);
