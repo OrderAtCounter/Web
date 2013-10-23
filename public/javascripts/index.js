@@ -9,6 +9,7 @@ $('#newOrderButton').click(function() {
       phoneNumber: phoneNumber
     },
     success: function(order) {
+      
     }
   })  
 });

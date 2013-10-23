@@ -4,15 +4,12 @@ var express = require('express')
   , mongoose = require('mongoose')
   , fs = require('fs')
   , webRoutes = require('./routes')
-  , iOSRoutes = require('./routes/iOS')
   , passport = require('passport')
   , LocalStrategy = require('passport-local').Strategy
   , User = require('./models/User')
   , RedisStore = require('connect-redis')(express);
 
 var app = express();
-
-var redisOptions = {};
 
 if(process.env.NODE_ENV === 'development') {
   app.use(express.errorHandler());
@@ -31,6 +28,12 @@ else if(process.env.NODE_ENV === 'production') {
 else {
   console.log('You need to set your process variable to either production or development to load in your environment variables.');
 }
+
+var iOSRoutes = require('./routes/iOS');
+
+
+var redisOptions = {};
+
 
 redisOptions.host = process.env.redisHost;
 redisOptions.port = process.env.redisPort;
@@ -106,7 +109,8 @@ app.post('/addSubscription', ensureAuthenticated, webRoutes.addSubscription);
 app.post('/iOSLogin', iOSRoutes.login);
 app.post('/iOSLogout', iOSRoutes.logout);
 app.post('/iOSOrder', iOSRoutes.createOrder);
-app.post('/iOSRemoveOrder', iOSRoutes.removeOrder);
+app.post('/iOSFulfillOrder', iOSRoutes.fulfillOrder);
+app.post('/iOSOrders', iOSRoutes.getOrders);
 
 http.createServer(app).listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));

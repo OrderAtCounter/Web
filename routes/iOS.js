@@ -1,5 +1,7 @@
 var mongoose = require('mongoose');
 var mongooseModels = require('../models/MongooseModels');
+var twilioClient = require('twilio')(process.env.TWILIO_ACCOUNT_SID, process.env.TWILIO_AUTH_TOKEN);
+var twilioNumber = process.env.TWILIO_NUMBER;
 
 var User = mongooseModels.User;
 var Session = mongooseModels.Session;
@@ -87,7 +89,7 @@ exports.createOrder = function(req, res) {
   });
 }
 
-exports.removeOrder = function(req, res) {
+exports.fulfillOrder = function(req, res) {
   var sessionId = req.body['sessionId'];
   var email = req.body['email'];
   var orderNumber = req.body['orderNumber'];
@@ -99,12 +101,48 @@ exports.removeOrder = function(req, res) {
       res.send(500, 'Session does not exist.');
     }
     else {
-      Order.remove({orderNumber: orderNumber, email: email}, function(err) {
+      var user = req.user;
+      var message = user.settings.message;
+      twilioClient.sms.messages.create({
+        to: '7703554412',
+        from: twilioNumber,
+        body: message
+      }, function(err, message) {
         if(err) {
-          res.send(500, 'Error removing the order.');
+          res.send(500);
         }
         else {
-          res.json({orderNumber: orderNumber});
+          Order.remove({email: user.email, orderNumber: orderNumber}, function(err) {
+            if(err) {
+              res.send(500);
+            }
+            else {
+              res.send(200);
+            }
+          });
+        }
+      });
+    }
+  });
+}
+
+exports.getOrders = function(req, res) {
+  var sessionId = req.body['sessionId'];
+  var email = req.body['email'];
+  ensureSession(email, sessionId, function(err, session) {
+    if(err) {
+      res.send(500, 'Error ensuring session.');
+    }
+    else if(!session) {
+      res.send(500, 'Session does not exist.');
+    }
+    else {
+      Order.find({email: email}, function(err, orders) {
+        if(err) {
+          res.send(500);
+        }
+        else {
+          res.send(200, orders);
         }
       });
     }

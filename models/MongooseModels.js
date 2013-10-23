@@ -7,7 +7,7 @@ var UserSchema = new Schema({
   password: String,
   businessName: String,
   settings: {
-    message: String,
+    message: {type: String, default: 'Your order is ready!'},
     plan: String
   }
 });
@@ -23,7 +23,6 @@ var OrderSchema = new Schema({
   completed: {type: Boolean, default: false},
   email: String
 });
-
 
 var User = mongoose.model('User', UserSchema);
 var Session = mongoose.model('Session', SessionSchema);
