@@ -8,18 +8,23 @@ div.row
     else
       h3 You are enrolled in #{user.settings.plan}
 div#payment-form
-  div.form-row
-    label
-      span Card Number
-      input(type='text', data-stripe='number')
-  div.form-row
-    label
-      span CVC
-      input(type='text', data-stripe='cvc')
-  div.form-row
-    label
-      span Expiration (MM/YYYY)
-      input(type='text', data-stripe='exp-month')
-    span /
-    input(type='text', data-stripe='exp-year')
-  button#submitPay Create Subscription
+  div.row
+    div.col-md-3
+      div.form-group
+        label(for='inputNumber') Card Number
+        input.form-control(type='text', id='inputNumber', placeholder='Card Number', name='number', data-stripe='number')
+  div.row
+    div.col-md-1
+      div.form-group
+        label(for='inputCVC') CVC
+        input.form-control(type='text', id='inputCVC', placeholder='CVC', name='CVC', data-stripe='cvc')
+  div.row
+    div.col-md-4
+      div.form-group
+        label(for='inputMonth') Expiration Date
+        div.row
+          div.col-md-3
+            input.form-control(type='text', id='inputMonth', placeholder='MM', name='month', data-stripe='exp-month')
+          div.col-md-3
+            input.form-control(type='text', id='inputYear', placeholder='YYYY', name='year', data-stripe='exp-year')
+  button.btn.btn-primary#submitPay Create Plan
