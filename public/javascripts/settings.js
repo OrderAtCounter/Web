@@ -54,7 +54,7 @@ $('#editAccountButton').click(function() {
       success: function(response) {
         var updatedEmail = response.email;
         var updatedBusinessName = response.businessName;
-        $('a.navbar-brand').text(updatedBusinessName);
+        $('#navBusinessName').text(updatedBusinessName);
       },
       error: function() {
       }
