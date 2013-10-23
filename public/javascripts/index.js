@@ -9,7 +9,7 @@ $('#newOrderButton').click(function() {
       phoneNumber: phoneNumber
     },
     success: function(order) {
-      
+      $('#activeOrdersBox').append(order);
     }
   })  
 });

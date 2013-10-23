@@ -90,7 +90,7 @@ exports.createOrder = function(req, res) {
           res.send(500, 'Error saving order.');
         }
         else {
-          res.send(200, convertOrders([newOrder])[0]);
+          res.render('order', {order: convertOrders([newOrder])[0]});
         }
       });
     }
@@ -210,7 +210,7 @@ exports.getSettings = function(req, res) {
 }
 
 var convertOrders = function(orders) {
-  convertedOrders = orders.map(function(order) {
+  var convertedOrders = orders.map(function(order) {
     var timestamp = order._id.getTimestamp();
     var milliseconds = Date.parse(timestamp);
     var date = new Date();
@@ -228,7 +228,6 @@ var convertOrders = function(orders) {
       AM = 'AM';
     }
     order.timestamp = hour + ':' + minute + ' ' + AM;
-
     var areaCode = order.phoneNumber.slice(0, 3);
     var firstPhone = order.phoneNumber.slice(3, 6);
     var secondPhone = order.phoneNumber.slice(6, 10);
