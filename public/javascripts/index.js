@@ -10,8 +10,17 @@ $('#newOrderButton').click(function() {
     },
     success: function(order) {
       $('#activeOrdersBox').append(order);
+      $('.newOrderInputs').val('');
+      $('#orderInput').focus();
     }
-  })  
+  });
 });
 
 $('#orderInput').focus();
+$('#newOrderBox').keypress(function(e) {
+  if(e.which) {
+    if(e.which === 13) {
+      $('#newOrderButton').click();
+    }
+  }
+});
