@@ -1,0 +1,17 @@
+div.order
+  div.row
+    div.col-md-3.col-xs-12
+      div.orderNumber='#' + order.orderNumber
+    div.col-md-4.col-xs-12
+      div.row
+        div.col-md-1.col-xs-1
+          img(src='/images/phone-number.png', alt='phone')
+        div.col-md-9.col-xs-10
+          div.phoneNumber #{order.phoneNumber}
+      div.row
+        div.col-md-1.col-xs-1
+          img(src='/images/clock.png', alt='clock')
+        div.col-md-9.col-xs-10
+          div.phoneTimestamp #{order.timestamp}
+    div.col-md-5.col-xs-12
+      button.readyButton READY?

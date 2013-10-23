@@ -90,7 +90,7 @@ exports.createOrder = function(req, res) {
           res.send(500, 'Error saving order.');
         }
         else {
-          res.send(200, newOrder);
+          res.render('order', {order: convertOrders([newOrder])[0]});
         }
       });
     }
@@ -189,31 +189,7 @@ exports.getIndex = function(req, res) {
         res.send(500, 'Error finding orders.');
       }
       else {
-        orders = orders.map(function(order) {
-          var timestamp = order._id.getTimestamp();
-          var milliseconds = Date.parse(timestamp);
-          var date = new Date();
-          date.setTime(milliseconds);
-          var hour = date.getHours();
-          var minute = date.getMinutes();
-          var second = date.getSeconds();
-          var AM = 'AM';
-          if((hour > 12) || ((hour === 12) && (minute >= 0)) || ((hour === 12) && (second >= 0))) {
-            hour = hour - 12;
-            AM = 'PM';
-          }
-          if(hour == 0) {
-            hour = 12;
-            AM = 'AM';
-          }
-          order.timestamp = hour + ':' + minute + ' ' + AM;
-
-          var areaCode = order.phoneNumber.slice(0, 3);
-          var firstPhone = order.phoneNumber.slice(3, 6);
-          var secondPhone = order.phoneNumber.slice(6, 10);
-          order.phoneNumber = areaCode + '-' + firstPhone + '-' + secondPhone;
-          return order;
-        });
+        orders = convertOrders(orders);
         res.render('index', {user: req.user, orders: orders});
       }
     });
@@ -231,4 +207,32 @@ exports.getSettings = function(req, res) {
   else {
     res.send(403);
   }
+}
+
+var convertOrders = function(orders) {
+  var convertedOrders = orders.map(function(order) {
+    var timestamp = order._id.getTimestamp();
+    var milliseconds = Date.parse(timestamp);
+    var date = new Date();
+    date.setTime(milliseconds);
+    var hour = date.getHours();
+    var minute = date.getMinutes();
+    var second = date.getSeconds();
+    var AM = 'AM';
+    if((hour > 12) || ((hour === 12) && (minute >= 0)) || ((hour === 12) && (second >= 0))) {
+      hour = hour - 12;
+      AM = 'PM';
+    }
+    if(hour == 0) {
+      hour = 12;
+      AM = 'AM';
+    }
+    order.timestamp = hour + ':' + minute + ' ' + AM;
+    var areaCode = order.phoneNumber.slice(0, 3);
+    var firstPhone = order.phoneNumber.slice(3, 6);
+    var secondPhone = order.phoneNumber.slice(6, 10);
+    order.phoneNumber = areaCode + '-' + firstPhone + '-' + secondPhone;
+    return order;
+  });
+  return convertedOrders;
 }

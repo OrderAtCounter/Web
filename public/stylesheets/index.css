@@ -88,6 +88,7 @@
   color: #71C2B3;
   border: 3px solid #71C2B3;
   background-color: #FFFFFF;
+  margin-top: 4px;
 }
 
 .phoneNumber, .phoneTimestamp {
