@@ -104,7 +104,7 @@ exports.fulfillOrder = function(req, res) {
       var user = req.user;
       var message = user.settings.message;
       twilioClient.sms.messages.create({
-        to: '7703554412',
+        to: process.env.PHONE_NUMBER,
         from: twilioNumber,
         body: message
       }, function(err, message) {
