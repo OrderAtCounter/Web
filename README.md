@@ -43,7 +43,7 @@ phoneNumber
 Status Code: 200 
 
 ####Fulfill Order  
-Description: Fulfill an order and send the text 
+Description: Fulfill an order and send the text  
 URL: http://orderatcounter.herokuapp.com/iOSFulfillOrder  
 Type: POST  
 #####Data Required
@@ -56,8 +56,8 @@ orderNumber
 Status Code: 200 
 
 ####Get Orders  
-Description: Get the active orders for a user 
-URL: http://orderatcounter.herokuapp.com/iOSOrders
+Description: Get the active orders for a user   
+URL: http://orderatcounter.herokuapp.com/iOSOrders  
 Type: POST  
 #####Data Required
 email  
