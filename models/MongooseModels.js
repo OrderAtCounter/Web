@@ -13,7 +13,7 @@ var UserSchema = new Schema({
 });
 
 var SessionSchema = new Schema({
-  email: String,
+  lowerEmail: String,
   source: String
 });
 
@@ -21,7 +21,8 @@ var OrderSchema = new Schema({
   orderNumber: Number,
   phoneNumber: String,
   completed: {type: Boolean, default: false},
-  email: String
+  email: String,
+  timestamp: String
 });
 
 var User = mongoose.model('User', UserSchema);
