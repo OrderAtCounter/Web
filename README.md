@@ -40,7 +40,33 @@ phoneNumber
 #####Example Data  
 {email: 'chris.amavisca@gmail.com', sessionId: '5495340', orderNumber: '132', phoneNumber: '403-312-4324'}  
 #####Success Response  
-Status Code: 200  
+Status Code: 200 
+
+####Fulfill Order  
+Description: Fulfill an order and send the text  
+URL: http://orderatcounter.herokuapp.com/iOSFulfillOrder  
+Type: POST  
+#####Data Required
+email  
+sessionId  
+orderNumber  
+#####Example Data  
+{email: 'chris.amavisca@gmail.com', sessionId: '5495340', orderNumber: '132'}  
+#####Success Response  
+Status Code: 200 
+
+####Get Orders  
+Description: Get the active orders for a user   
+URL: http://orderatcounter.herokuapp.com/iOSOrders  
+Type: POST  
+#####Data Required
+email  
+sessionId  
+#####Example Data  
+{email: 'chris.amavisca@gmail.com', sessionId: '5495340'}  
+#####Success Response  
+Status Code: 200 , orders
+
 
 ###Web
 
