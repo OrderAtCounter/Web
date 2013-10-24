@@ -11,6 +11,11 @@ var express = require('express')
 
 var app = express();
 
+
+
+
+var redisOptions = {};
+
 if(process.env.NODE_ENV === 'development') {
   app.use(express.errorHandler());
   var envFile = fs.readFileSync('./.env', 'utf-8');  
@@ -29,14 +34,9 @@ else {
   console.log('You need to set your process variable to either production or development to load in your environment variables.');
 }
 
-var iOSRoutes = require('./routes/iOS');
-
-
-var redisOptions = {};
-
-
 redisOptions.host = process.env.redisHost;
 redisOptions.port = process.env.redisPort;
+var iOSRoutes = require('./routes/iOS');
 
 app.set('port', process.env.PORT || 3000);
 app.set('views', __dirname + '/views');
