@@ -11,9 +11,6 @@ var express = require('express')
 
 var app = express();
 
-
-
-
 var redisOptions = {};
 
 if(process.env.NODE_ENV === 'development') {
