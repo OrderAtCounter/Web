@@ -1,41 +1,70 @@
-#accountColumn {
+#mainAbout {
+  height: 400px;
+  background-color: #71C2B3;
+}
+
+#aboutTextColumn {
+  width: 500px;
+  height: 400px;
+}
+
+#aboutImageColumn {
+  width: 460px;
   float: right;
-  height: 600px;
+  height: 400px;
 }
 
-#descriptiveColumn {
-  height: 600px;
+#textRow1 {
+  color: #FFFFFF;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 24px;
+  padding-left: 54px;
+  margin-top: 45px;
 }
 
-div#branding {
-  border: 1px solid;
-  width: 500px;
-  height: 150px;
-  margin: 0 auto;
-  float: none;
+#textRow2 {
+  color: #FFFFFF;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 27px;
+  padding-left: 54px;
 }
 
-div#procedure {
-  width: 500px;
-  height: 200px;
-  margin-left: 75px;
-  margin-top: 50px;
+@media(min-width: 992px) {
+  #mainAbout {
+    padding-top: 100px;
+  }
 }
 
-div#mainRow {
-  margin-top: 50px;
+.circle {
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  background-color: #FFFFFF;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 14px;
+  color: #71C2B3;
+  padding-left: 6px;
 }
 
-#loginButton {
-  width: 250px;
-  height: 50px;
+#firstCircle {
+  padding-left: 7px;
 }
 
-#createAccountButton {
-  width: 250px;
-  height: 50px;
+.aboutListItem {
+  padding-left: 60px;
 }
 
-#callToAction {
-  margin-top: 150px;
+#aboutList {
+  margin-top: 30px;
+}
+
+.aboutListItem:not(:first-of-type) {
+  margin-top: 20px;
+}
+
+.aboutText {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 18px;
+  color: #FFFFFF;
+  margin-left: 10px;
 }
