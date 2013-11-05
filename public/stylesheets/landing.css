@@ -36,6 +36,7 @@
 }
 
 .circle {
+  display: inline-block;
   border-radius: 50%;
   width: 20px;
   height: 20px;
@@ -66,5 +67,30 @@
   font-family: 'Montserrat', sans-serif;
   font-size: 18px;
   color: #FFFFFF;
-  margin-left: 10px;
+  margin-left: 25px;
+}
+
+#mainPricing {
+  background-color: #FFFFFF;
+  height: 450px;
+}
+
+#freeDiv {
+  height: 200px;
+  margin-left: 54px;
+  width: 400px;
+  float: left;
+  margin-top: -100px;
+}
+
+#freeText1 {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 24px;
+  color: #4C4A49;
+}
+
+#freeText2 {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 27px;
+  color: #4C4A49;
 }

@@ -81,3 +81,11 @@ ul#landingButtonList {
 #loginButton:hover {
   color: #71C2B3;
 }
+
+#signupButton:focus {
+  outline: none;
+}
+
+#loginButton:focus {
+  outline: none;
+}
