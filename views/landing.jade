@@ -2,17 +2,10 @@ html
   head
     include bootstrap
     link(rel='stylesheet', href='/stylesheets/landing.css')
+    link(rel='stylesheet', href='/stylesheets/landing-nav.css')
   body
-    div.container
-      div.row#mainRow
-        div.col-md-7#descriptiveColumn
-          div#branding
-          div#procedure
-            p Text your customers when their order is ready
-            p Provide custom deals to your customers
-            p View analytics of your business
-        div.col-md-5#accountColumn
-          button.btn.btn-default#loginButton Log in
-          p#callToAction Get started with a free trial!
-          button.btn.btn-success#createAccountButton Create Account
+    include landing-nav
+    include landing-about
+    include landing-pricing
+  script(type='text/javascript', src='/javascripts/nav.js')
   script(type='text/javascript', src='/javascripts/landing.js')

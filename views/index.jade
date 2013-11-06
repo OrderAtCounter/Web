@@ -8,16 +8,17 @@ html
     link(rel='stylesheet', href='/stylesheets/index.css')
   body
     include nav
-    div.container
+    div.container#mainContainer
       div.row
         div.col-md-4.col-xs-12#newOrderColumn
-          div#newOrderTitle Add New Order
-          div#newOrderBox
-            div.newOrderSubtitles New Order Number
-            input.newOrderInputs#orderInput(type='text', placeholder=' # 1', name='order')
-            div.newOrderSubtitles Phone Number
-            input.newOrderInputs#phoneNumberInput(type='text', placeholder=' (404) - 555 - 5555', name='phoneNumber')
-            button#newOrderButton ADD TO ACTIVE ORDERS
+          div#newOrderFixed
+            div#newOrderTitle Add New Order
+            div#newOrderBox
+              div.newOrderSubtitles New Order Number
+              input.newOrderInputs#orderInput(type='text', placeholder=' # 1', name='order')
+              div.newOrderSubtitles Phone Number
+              input.newOrderInputs#phoneNumberInput(type='text', placeholder=' (404) - 555 - 5555', name='phoneNumber')
+              button#newOrderButton ADD TO ACTIVE ORDERS
         div.col-md-7.col-xs-12#activeOrdersColumn
           div#activeOrdersTitle Active Orders
           div#activeOrdersBox

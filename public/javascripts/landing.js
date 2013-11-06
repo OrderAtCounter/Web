@@ -1,5 +1,5 @@
-$('#createAccountButton').click(function() {
-  window.location = '/createAccount';
+$('#signupButton').click(function() {
+  window.location = '/signup'
 });
 
 $('#loginButton').click(function() {

@@ -1,0 +1,91 @@
+#navBrand {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 24px;
+  font-weight: bold;
+  color: #EF493A;
+  margin-top: 22px;
+  margin-left: 40px;
+}
+
+#navIcon {
+  margin-left: 10px;
+}
+
+#imageIcon {
+  margin-bottom: 4px;
+}
+
+#mainNav {
+  height: 100px;
+  background-color: #F7F7F5;
+  width: 100%;
+}
+
+@media (min-width: 992px) {
+  #mainNav {
+    position: fixed;
+  }
+}
+
+ul#landingList {
+  margin-left: 80px;
+  margin-top: 25px;
+}
+
+ul#landingList li a {
+  font-size: 16px;
+  color: #000000;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: bold;
+}
+
+ul#landingList li a:hover {
+  color: #71C2B3;
+}
+
+ul#landingList li:not(:first-child) {
+  margin-left: 30px;
+}
+
+ul#landingButtonList {
+  margin-left: 240px;
+  margin-top: 25px;
+}
+
+#signupButton {
+  height: 44px;
+  width: 120px;
+  border: none;
+  background-color: #EF493A;
+  color: #FFFFFF;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 16px;
+  letter-spacing: 1px;
+}
+
+#loginButton {
+  height: 44px;
+  width: 120px;
+  border: none;
+  background: none;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 16px;
+  color: #000000;
+  font-weight: bold;
+}
+
+#signupButton:hover {
+  background-color: #D33C35;
+}
+
+#loginButton:hover {
+  color: #71C2B3;
+}
+
+#signupButton:focus {
+  outline: none;
+}
+
+#loginButton:focus {
+  outline: none;
+}

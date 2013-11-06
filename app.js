@@ -31,6 +31,10 @@ else {
   console.log('You need to set your process variable to either production or development to load in your environment variables.');
 }
 
+var iOSRoutes = require('./routes/iOS');
+
+var redisOptions = {};
+
 redisOptions.host = process.env.redisHost;
 redisOptions.port = process.env.redisPort;
 var iOSRoutes = require('./routes/iOS');
@@ -89,7 +93,7 @@ passport.use(new LocalStrategy(
 
 /* Web GET routes */
 app.get('/', webRoutes.getIndex);
-app.get('/createAccount', webRoutes.getCreateAccount);
+app.get('/signup', webRoutes.getCreateAccount);
 app.get('/login', webRoutes.getLogin);
 app.get('/logout', webRoutes.getLogout);
 app.get('/settings', ensureAuthenticated, webRoutes.getSettings);
