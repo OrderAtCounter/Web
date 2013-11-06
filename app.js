@@ -11,6 +11,8 @@ var express = require('express')
 
 var app = express();
 
+var redisOptions = {};
+
 if(process.env.NODE_ENV === 'development') {
   app.use(express.errorHandler());
   var envFile = fs.readFileSync('./.env', 'utf-8');  
@@ -35,6 +37,7 @@ var redisOptions = {};
 
 redisOptions.host = process.env.redisHost;
 redisOptions.port = process.env.redisPort;
+var iOSRoutes = require('./routes/iOS');
 
 app.set('port', process.env.PORT || 3000);
 app.set('views', __dirname + '/views');
