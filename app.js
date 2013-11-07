@@ -107,12 +107,15 @@ app.post('/messageSettings', ensureAuthenticated, webRoutes.updateMessageSetting
 app.post('/addSubscription', ensureAuthenticated, webRoutes.addSubscription);
 app.post('/fulfillOrder', ensureAuthenticated, webRoutes.fulfillOrder);
 
+/* iOS GET Routes */
+app.get('/iOSSettings', iOSRoutes.getSettings);
+app.get('/iOSOrders', iOSRoutes.getOrders);
+
 /* iOS POST Routes */
 app.post('/iOSLogin', iOSRoutes.login);
 app.post('/iOSLogout', iOSRoutes.logout);
 app.post('/iOSOrder', iOSRoutes.createOrder);
 app.post('/iOSFulfillOrder', iOSRoutes.fulfillOrder);
-app.post('/iOSOrders', iOSRoutes.getOrders);
 
 http.createServer(app).listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));

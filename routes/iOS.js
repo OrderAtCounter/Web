@@ -149,6 +149,22 @@ exports.getOrders = function(req, res) {
   });
 }
 
+exports.getSettings = function(req, res) {
+  var sessionId = req.body['sessionId'];
+  var email = req.body['email'];
+  ensureSession(email, sessionId, function(err, session) {
+    if(err) {
+      res.send(500, 'Error ensuring session.');
+    }
+    else if(!session) {
+      res.send(500, 'Session does not exist.');
+    }
+    else {
+      res.json({settings: req.user.settings});
+    }
+  });
+}
+
 var ensureSession = function(email, sessionId, callback) {
   var ObjectId = mongoose.Types.ObjectId;
   Session.findOne({_id: new ObjectId(sessionId), lowerEmail: email.toLowerCase()}, function(err, session) {
