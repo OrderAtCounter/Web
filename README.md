@@ -13,7 +13,7 @@ Within the Web repository, run npm install. This will install all required modul
 
 Run mongod and redis-server as system processes.
 
-Environment variables required for below:
+###Environment variables required for below:
 
 NODE_ENV
 
@@ -33,7 +33,7 @@ TWILIO_NUMBER
 
 PHONE_NUMBER
 
-Local:
+###Local:
 Set your NODE_ENV environment variable to development.
 
 Create a .env file with environment variables on a single line. Example:
@@ -42,7 +42,7 @@ TEST_VARIABLE=test
 
 OTHER_VARIABLE=other
 
-Production:
+###Production:
 
 Set environment variables.
 
