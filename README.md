@@ -24,7 +24,7 @@ TWILIO_NUMBER
 PHONE_NUMBER
 
 ###Local:
-Set your NODE_ENV environment variable to development.
+Set your NODE_ENV environment variable to "development".
 
 Create a .env file with environment variables on a single line. Example:
 
@@ -33,6 +33,8 @@ TEST_VARIABLE=test
 OTHER_VARIABLE=other
 
 ###Production:
+
+Set your NODE_ENV environment variable to "production".
 
 Set environment variables.
 
