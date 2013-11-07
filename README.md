@@ -3,17 +3,7 @@ Order At The Counter
 
 ##Deployment
 
-Install node.js: http://nodejs.org/
-
-npm install mongod -g
-
-Download and build redis: http://redis.io/download
-
-Within the Web repository, run npm install. This will install all required modules and dependencies for the Web repository.
-
-Run mongod and redis-server as system processes.
-
-###Environment variables required for below:
+###Environment variables required:
 
 NODE_ENV
 
@@ -45,6 +35,26 @@ OTHER_VARIABLE=other
 ###Production:
 
 Set environment variables.
+
+###Installation
+
+Install node.js: http://nodejs.org/
+
+npm install mongod -g
+
+Download and build redis: http://redis.io/download
+
+Within the Web repository, run npm install. This will install all required modules and dependencies for the Web repository.
+
+Ensure that your environment variables are set to the proper ports and URLs defined by your mongod and redis-server instances.
+
+###Run
+
+mongod
+
+redis-server
+
+node app.js
 
 ##Routes
 
