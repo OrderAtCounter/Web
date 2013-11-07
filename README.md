@@ -1,5 +1,51 @@
 Order At The Counter
 ===
+
+##Deployment
+
+Install node.js: http://nodejs.org/
+
+npm install mongod -g
+
+Download and build redis: http://redis.io/download
+
+Within the Web repository, run npm install. This will install all required modules and dependencies for the Web repository.
+
+Run mongod and redis-server as system processes.
+
+Environment variables required for below:
+
+NODE_ENV
+
+mongooseURL
+
+redisHost
+
+redisPort
+
+STRIPE_TEST_KEY
+
+TWILIO_ACCOUNT_SID
+
+TWILIO_AUTH_TOKEN
+
+TWILIO_NUMBER
+
+PHONE_NUMBER
+
+Local:
+Set your NODE_ENV environment variable to development.
+
+Create a .env file with environment variables on a single line. Example:
+
+TEST_VARIABLE=test
+
+OTHER_VARIABLE=other
+
+Production:
+
+Set environment variables.
+
 ##Routes
 
 ###iOS
