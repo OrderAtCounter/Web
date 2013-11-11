@@ -11,3 +11,11 @@ $('.loginForm').keypress(function(e) {
     }
   }
 });
+
+$('#signUpSpan').click(function() {
+  window.location = '/signup';
+});
+
+$('#cancel').click(function() {
+  window.location = '/';
+});

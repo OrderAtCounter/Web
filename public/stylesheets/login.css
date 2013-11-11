@@ -80,3 +80,7 @@ div#cancel {
 .helpDiv {
   margin-top: 35px;
 }
+
+#cancel:hover, #signUpSpan:hover {
+  cursor: pointer;
+}
