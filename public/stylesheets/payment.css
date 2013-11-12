@@ -169,4 +169,9 @@
   background-color: #EF493A;
   padding-top: 10px;
   text-align: center;
+  margin-top: -10px;
+}
+
+.createPlanButton:hover {
+  background-color: #D33C35;
 }
