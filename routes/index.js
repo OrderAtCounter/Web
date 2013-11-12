@@ -31,7 +31,7 @@ exports.createAccount = function(req, res) {
               res.send(500, 'Error logging in after creating account.');
             }
             else {
-              res.redirect('/');
+              res.redirect('/payment');
             }
           });
         }
@@ -205,6 +205,23 @@ exports.getSettings = function(req, res) {
 
 exports.fulfillOrder = function(req, res) {
   
+}
+
+exports.setCookie = function(req, res) {
+  var plan = req.body['plan'];
+  res.cookie('plan', plan, {maxAge: 100000});
+  res.send(200);
+}
+
+exports.getPayment = function(req, res) {
+  var plan = req.cookies.plan;
+  if(plan) {
+    res.render('payment', {user: req.user});
+  }
+  else {
+    res.clearCookie('plan');
+    res.render('payment', {plan: plan, user: req.user});
+  }
 }
 
 var convertOrders = function(orders) {

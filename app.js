@@ -97,6 +97,7 @@ app.get('/signup', webRoutes.getCreateAccount);
 app.get('/login', webRoutes.getLogin);
 app.get('/logout', webRoutes.getLogout);
 app.get('/settings', ensureAuthenticated, webRoutes.getSettings);
+app.get('/payment', webRoutes.getPayment);
 
 /* Web POST routes */
 app.post('/signup', webRoutes.createAccount);
@@ -106,6 +107,7 @@ app.post('/settings', ensureAuthenticated, webRoutes.updateAccountSettings);
 app.post('/messageSettings', ensureAuthenticated, webRoutes.updateMessageSettings);
 app.post('/addSubscription', ensureAuthenticated, webRoutes.addSubscription);
 app.post('/fulfillOrder', ensureAuthenticated, webRoutes.fulfillOrder);
+app.post('/setSignupCookie', webRoutes.setCookie);
 
 /* iOS GET Routes */
 app.get('/iOSSettings', iOSRoutes.getSettings);

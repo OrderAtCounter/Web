@@ -1,0 +1,62 @@
+.container {
+  margin: 0 auto;
+}
+
+#pricingText {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 18px;
+  color: #4C4A49;
+  font-weight: bold;
+  margin-left: 120px;
+}
+
+.priceContainer {
+  padding-top: 120px;
+}
+
+.priceBox {
+  width: 900px;
+  margin: 0 auto;
+  margin-top: 20px;
+  height: 250px;
+}
+
+.priceTab {
+  width: 33%;
+  height: 250px;
+}
+
+.priceTab:first-child {
+  float: left;
+}
+
+.priceTab:nth-child(1) {
+  float: right;
+}
+
+.priceTab:nth-child(2) {
+  float: right;
+  margin-right: .5%;
+} 
+
+.priceHeaderDiv {
+  height: 50px;
+  border: 1px solid #000;
+  text-align: center;
+  font-size: 18px;
+  font-family: 'Montserrat', sans-serif;
+  color: #FFFFFF;
+  padding-top: 12px;
+}
+
+.priceTab:first-child .priceHeaderDiv {
+  background-color: #EF493A;
+}
+
+.priceTab:nth-child(2) .priceHeaderDiv {
+  background-color: #71C2B3;
+}
+
+.priceTab:nth-child(3) .priceHeaderDiv {
+  background-color: #4C4A49;
+}

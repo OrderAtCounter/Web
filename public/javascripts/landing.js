@@ -1,5 +1,12 @@
 $('#signupButton').click(function() {
-  window.location = '/signup'
+  $.ajax({
+    url: 'setSignupCookie',
+    method: 'POST',
+    data: {plan: '0'},
+    success: function() {
+      window.location = '/signup';
+    }
+  })
 });
 
 $('#loginButton').click(function() {

@@ -1,0 +1,18 @@
+!!! 5
+html
+  head
+    include bootstrap
+    link(rel='stylesheet', href='/stylesheets/payment.css')
+  body
+    include nav
+    div.container.priceContainer
+      div#pricingText Pricing Options
+      div.priceBox
+        div.priceTab
+          div.priceHeaderDiv 5000 texts/month
+        div.priceTab
+          div.priceHeaderDiv 2500 texts/month
+        div.priceTab
+          div.priceHeaderDiv 1000 texts/month
+    script(type='text/javascript', src='/javascripts/payment.js')
+    script(type='text/javascript', src='/javascripts/nav.js')
