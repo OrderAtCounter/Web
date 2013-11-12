@@ -1,19 +1,19 @@
-$('.loginButton').click(function() {
-    $('.loginForm').submit();
+$('.signupButton').click(function() {
+    $('.signupForm').submit();
 });
 
 $('#inputEmail').focus();
 
-$('.loginForm').keypress(function(e) {
+$('.signupForm').keypress(function(e) {
   if(e.which) {
     if(e.which === 13) {
-      $('.loginButton').click();
+      $('.signupButton').click();
     }
   }
 });
 
-$('#signUpSpan').click(function() {
-  window.location = '/signup';
+$('#loginSpan').click(function() {
+  window.location = '/login';
 });
 
 $('#cancel').click(function() {

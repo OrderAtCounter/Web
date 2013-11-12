@@ -1,0 +1,29 @@
+html
+  head
+    include bootstrap
+    link(rel='stylesheet', href='/stylesheets/landing-nav.css')
+    link(rel='stylesheet', href='/stylesheets/signup.css')
+  body
+    include landing-nav
+    div.container
+      div#signupBox
+        div.signupText Sign Up
+        form.signupForm(role='form', action='signup', method='POST')
+          div.form-group
+            label.inputLabel(for='inputEmail') Email Address
+            input.form-control#inputEmail(name='email', type='email')
+          div.form-group
+            label.inputLabel(for='inputPassword') Password
+            input.form-control#inputPassword(name='password',type='password')
+          div.form-group
+            label.inputLabel(for='inputBusinessName') Business name
+            input.form-control#inputBusinessName(name='businessName', type='text')
+        button.signupButton Sign Up
+        div.helpDiv
+          div#returningUser
+            div#returningUserText Returning User?
+              span#loginSpan Log In
+              span#period='.'
+          div#cancel
+            div#cancelText Cancel
+  script(type='text/javascript', src='/javascripts/signup.js')

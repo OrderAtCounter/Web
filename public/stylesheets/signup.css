@@ -1,0 +1,87 @@
+#signupButton {
+  color: #FFFFFF;
+  background-color: #D33C35;
+}
+
+#signupBox {
+  width: 600px;
+  height: 500px;
+  margin-top: 200px;
+  margin-left: 300px;
+}
+
+.signupText {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 24px;
+  color: #4C4A49;
+  margin-left: 5px;
+  font-weight: bold;
+}
+
+#inputEmail, #inputPassword, #inputBusinessName {
+  border-radius: 0;
+  width: 70%;
+  height: 40px;
+  border: 1px solid #231F20;
+}
+
+.inputLabel {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 18px;
+  font-color: #4C4A49;
+  font-weight: normal;
+}
+
+.signupForm {
+  margin-top: 50px;
+}
+
+.signupButton {
+  width: 70%;
+  height: 55px;
+  outline: none;
+  border: none;
+  background-color: #EF493A;
+  color: #FFFFFF;
+  font-size: 24px;
+  font-family: 'Montserrat', sans-serif;
+  margin-top: 10px;
+}
+
+div#returningUser {
+  float: left;
+}
+
+div#returningUserText {
+  color: #4C4A49;
+  font-size: 16px;
+  font-family: 'Montserrat', sans-serif;
+}
+
+span#loginSpan {
+  padding-left: 5px;
+  color: #71C2B3;
+  font-weight: bold;
+}
+
+span#period {
+  color: #4C4A49;
+}
+
+div#cancelText {
+  color: #4C4A49;
+  font-size: 16px;
+  font-family: 'Montserrat', sans-serif;
+}
+
+div#cancel {
+  margin-left: 62%;
+}
+
+.helpDiv {
+  margin-top: 35px;
+}
+
+#cancel:hover, #signUpSpan:hover {
+  cursor: pointer;
+}
