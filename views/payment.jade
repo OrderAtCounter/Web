@@ -34,8 +34,13 @@ html
         div.form-group
           label.inputLabel(for='cardNumber') Card Number
           input.form-control#cardNumberInput(name='cardNumber', type='text')
+        div.formWrapper
+          div.form-group.cvcGroup
+            label.inputLabel(for='CVC') CVC
+            input.form-control#cvcInput(name='CVC', type='text')
         div.form-group
-          label.inputLabel(for='CVC') CVC
-          input.form-control#cvcInput(name='CVC', type='text')
+          label.inputLabel(for='Expiry') Expiration Date
+          input.form-control#expirationInput(name='Expiry', type='text')
+      div.createPlanButton Subscribe and Pay
     script(type='text/javascript', src='/javascripts/payment.js')
     script(type='text/javascript', src='/javascripts/nav.js')
