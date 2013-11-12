@@ -3,16 +3,39 @@ html
   head
     include bootstrap
     link(rel='stylesheet', href='/stylesheets/payment.css')
+    script(src='/javascripts/stripe-card.js')
   body
     include nav
     div.container.priceContainer
+      div#titleText Choose a plan
       div#pricingText Pricing Options
       div.priceBox
         div.priceTab
           div.priceHeaderDiv 5000 texts/month
+          div.priceMainDiv
+            div.price $70
+              span.priceSpan per month
+            div.choosePlan Select plan
         div.priceTab
           div.priceHeaderDiv 2500 texts/month
+          div.priceMainDiv
+            div.price $40
+              span.priceSpan per month
+            div.choosePlan Select plan
         div.priceTab
           div.priceHeaderDiv 1000 texts/month
+          div.priceMainDiv
+            div.price $20
+              span.priceSpan per month
+            div.choosePlan Select plan
+    div.container.paymentContainer
+      div#paymentText Payment
+      div#paymentDiv
+        div.form-group
+          label.inputLabel(for='cardNumber') Card Number
+          input.form-control#cardNumberInput(name='cardNumber', type='text')
+        div.form-group
+          label.inputLabel(for='CVC') CVC
+          input.form-control#cvcInput(name='CVC', type='text')
     script(type='text/javascript', src='/javascripts/payment.js')
     script(type='text/javascript', src='/javascripts/nav.js')

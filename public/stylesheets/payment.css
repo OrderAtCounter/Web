@@ -2,6 +2,15 @@
   margin: 0 auto;
 }
 
+#titleText {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 24px;
+  color: #4C4A49;
+  font-weight: bold;
+  margin-left: 120px;
+  margin-bottom: 20px;
+}
+
 #pricingText {
   font-family: 'Montserrat', sans-serif;
   font-size: 18px;
@@ -18,12 +27,12 @@
   width: 900px;
   margin: 0 auto;
   margin-top: 20px;
-  height: 250px;
+  height: 200px;
 }
 
 .priceTab {
   width: 33%;
-  height: 250px;
+  height: 140px;
 }
 
 .priceTab:first-child {
@@ -36,12 +45,11 @@
 
 .priceTab:nth-child(2) {
   float: right;
-  margin-right: .5%;
+  margin-right: .6%;
 } 
 
 .priceHeaderDiv {
   height: 50px;
-  border: 1px solid #000;
   text-align: center;
   font-size: 18px;
   font-family: 'Montserrat', sans-serif;
@@ -59,4 +67,76 @@
 
 .priceTab:nth-child(3) .priceHeaderDiv {
   background-color: #4C4A49;
+}
+
+.price {
+  padding-top: 15px;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 24px;
+  color: #4C4A49;
+  text-align: center;
+}
+
+.priceSpan {
+  font-size: 16px;
+  margin-left: 5px;
+}
+
+.priceMainDiv {
+  background-color: #F7F7F5;
+  height: 110px;
+}
+
+.choosePlan {
+  margin: 0 auto;
+  text-align: center;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 16px;
+  cursor: pointer;
+  color: #FFFFFF;
+  margin-top: 20px;
+  width: 150px;
+  height: 30px;
+  padding-top: 4px;
+}
+
+.priceTab:first-child .priceMainDiv .choosePlan {
+  background-color: #EF493A;
+}
+
+.priceTab:nth-child(2) .priceMainDiv .choosePlan {
+  background-color: #71C2B3;
+}
+
+.priceTab:nth-child(3) .priceMainDiv .choosePlan {
+  background-color: #4C4A49;
+}
+
+#paymentText {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 18px;
+  color: #4C4A49;
+  font-weight: bold;
+  margin-left: 120px;
+}
+
+#paymentDiv {
+  width: 900px;
+  height: 200px;
+  margin: 0 auto;
+  margin-top: 20px;
+}
+
+#cardNumberInput {
+  width: 225px;
+  height: 40px;
+  font-size: 18px;
+  font-family: 'Montserrat', sans-serif;
+}
+
+#cvcInput {
+  width: 70px;
+  height: 40px;
+  font-size: 18px;
+  font-family: 'Montserrat', sans-serif;
 }
