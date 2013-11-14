@@ -70,23 +70,13 @@ exports.createOrder = function(req, res) {
   var phoneNumber = req.body['phoneNumber'];
   phoneNumber = phoneNumber.replace(/\D/g, '');
   var user = req.user;
-  Order.findOne({orderNumber: orderNumber, email: user.email}, function(err, orderExists) {
+  var order = new Order({orderNumber: orderNumber, phoneNumber: phoneNumber, email: user.email});
+  order.save(function(err, newOrder) {
     if(err) {
-      res.send(500, 'Error finding if order exists.');
-    }
-    else if(orderExists){
-      res.send(500, 'Order exists.');
+      res.send(500, 'Error saving order.');
     }
     else {
-      var order = new Order({orderNumber: orderNumber, phoneNumber: phoneNumber, email: user.email});
-      order.save(function(err, newOrder) {
-        if(err) {
-          res.send(500, 'Error saving order.');
-        }
-        else {
-          res.render('order', {order: convertOrders([newOrder])[0]});
-        }
-      });
+      res.render('order', {order: convertOrders([newOrder])[0]});
     }
   });
 }
@@ -204,6 +194,7 @@ exports.getSettings = function(req, res) {
 }
 
 exports.fulfillOrder = function(req, res) {
+  var email = req.user.email;
   
 }
 
