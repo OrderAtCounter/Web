@@ -232,19 +232,19 @@ exports.selectPlan = function(req, res) {
     card: token
   }, function(err, customer) {
     if(err) {
-      res.send(500);
+      res.send(500, err);
     }
     else {
       stripe.customers.update_subscription(customer.id, {plan: plan}, function(err, response) {
         if(err) {
-          res.send(500);
+          res.send(500, err);
         }
         else {
           var user = req.user;
           user.settings.plan = response;
           user.save(function(err) {
             if(err) {
-              res.send(500);
+              res.send(500, err);
             }
             else {
               res.send(200);

@@ -94,7 +94,7 @@ var stripeResponseHandler = function(status, response) {
       method: 'POST',
       data: {plan: plan, token: response.id},
       success: function() {
-        console.log('Success.');
+        window.location = '/';
       }
     });
   }
