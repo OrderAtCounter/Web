@@ -3,7 +3,6 @@ var express = require('express')
   , path = require('path')
   , mongoose = require('mongoose')
   , fs = require('fs')
-  , webRoutes = require('./routes')
   , passport = require('passport')
   , LocalStrategy = require('passport-local').Strategy
   , User = require('./models/User')
@@ -30,6 +29,8 @@ else if(process.env.NODE_ENV === 'production') {
 else {
   console.log('You need to set your process variable to either production or development to load in your environment variables.');
 }
+
+var webRoutes = require('./routes');
 
 var iOSRoutes = require('./routes/iOS');
 
@@ -97,7 +98,7 @@ app.get('/signup', webRoutes.getCreateAccount);
 app.get('/login', webRoutes.getLogin);
 app.get('/logout', webRoutes.getLogout);
 app.get('/settings', ensureAuthenticated, webRoutes.getSettings);
-app.get('/payment', webRoutes.getPayment);
+app.get('/payment', ensureAuthenticated, webRoutes.getPayment);
 
 /* Web POST routes */
 app.post('/signup', webRoutes.createAccount);
@@ -105,9 +106,9 @@ app.post('/loginUser', webRoutes.login);
 app.post('/createOrder', ensureAuthenticated, webRoutes.createOrder);
 app.post('/settings', ensureAuthenticated, webRoutes.updateAccountSettings);
 app.post('/messageSettings', ensureAuthenticated, webRoutes.updateMessageSettings);
-app.post('/addSubscription', ensureAuthenticated, webRoutes.addSubscription);
 app.post('/fulfillOrder', ensureAuthenticated, webRoutes.fulfillOrder);
-app.post('/setSignupCookie', webRoutes.setCookie);
+app.post('/setSignupCookie', ensureAuthenticated, webRoutes.setCookie);
+app.post('/selectPlan', ensureAuthenticated, webRoutes.selectPlan);
 
 /* iOS GET Routes */
 app.get('/iOSSettings', iOSRoutes.getSettings);

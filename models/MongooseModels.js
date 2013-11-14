@@ -8,7 +8,7 @@ var UserSchema = new Schema({
   businessName: String,
   settings: {
     message: {type: String, default: 'Your order is ready!'},
-    plan: String
+    plan: {}
   }
 });
 

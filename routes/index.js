@@ -224,6 +224,38 @@ exports.getPayment = function(req, res) {
   }
 }
 
+exports.selectPlan = function(req, res) {
+  var plan = req.body['plan'];
+  var token = req.body['token'];
+  stripe.customers.create({
+    email: req.user.email,
+    card: token
+  }, function(err, customer) {
+    if(err) {
+      res.send(500);
+    }
+    else {
+      stripe.customers.update_subscription(customer.id, {plan: plan}, function(err, response) {
+        if(err) {
+          res.send(500);
+        }
+        else {
+          var user = req.user;
+          user.settings.plan = response;
+          user.save(function(err) {
+            if(err) {
+              res.send(500);
+            }
+            else {
+              res.send(200);
+            }
+          });
+        }
+      });
+    }
+  });
+}
+
 var convertOrders = function(orders) {
   var convertedOrders = orders.map(function(order) {
     var timestamp = order._id.getTimestamp();
