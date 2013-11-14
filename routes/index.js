@@ -168,7 +168,7 @@ exports.getLogout = function(req, res) {
 /* GET for index */
 exports.getIndex = function(req, res) {
   if(req.user) {
-    Order.find({email: req.user.email}, function(err, orders) {
+    Order.find({email: req.user.email, completed: false}, function(err, orders) {
       if(err) {
         res.send(500, 'Error finding orders.');
       }
@@ -195,7 +195,22 @@ exports.getSettings = function(req, res) {
 
 exports.fulfillOrder = function(req, res) {
   var email = req.user.email;
-  
+  var orderId = req.body['orderId'];
+  ensurePlan(req.user, function(err) {
+    if(err) {
+      res.send(500, err);
+    }
+    else {
+      Order.findOne({_id: orderId, email: email}, function(err, order) {
+        if(err) {
+          res.send(500, err);
+        }
+        else {
+          
+        }
+      });
+    }
+  });
 }
 
 exports.setCookie = function(req, res) {
@@ -276,4 +291,20 @@ var convertOrders = function(orders) {
     return order;
   });
   return convertedOrders;
+}
+
+var ensurePlan = function(user, callback) {
+  var settings = user.settings;
+  var textLimit = user.settings.textLimit;
+  if(settings.plan.status == "active") {
+    if(textCount < textLimit) {
+      callback(null);
+    }
+    else {
+      callback('Over text limit.');
+    }
+  }
+  else {
+    callback(settings.plan.status);
+  }
 }

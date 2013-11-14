@@ -9,7 +9,8 @@ var UserSchema = new Schema({
   settings: {
     message: {type: String, default: 'Your order is ready!'},
     plan: {},
-    textCount: {type: Number, default: 0}
+    textCount: {type: Number, default: 0},
+    textLimit: Number
   }
 });
 
