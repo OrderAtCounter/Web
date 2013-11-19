@@ -206,7 +206,7 @@ exports.fulfillOrder = function(req, res) {
           res.send(500, err);
         }
         else {
-          
+          console.log('Plan ensured.');
         }
       });
     }
@@ -248,6 +248,20 @@ exports.selectPlan = function(req, res) {
         else {
           var user = req.user;
           user.settings.plan = response;
+          var textLimit;
+          if(plan == 1) {
+            textLimit = 1000;
+          }
+          else if(plan == 2) {
+            textLimit = 2500;
+          }
+          else if(plan == 3) {
+            textLimit = 5000;
+          }
+          else {
+            console.log('Plan error.');
+          }
+          user.settings.textLimit = textLimit;
           user.save(function(err) {
             if(err) {
               res.send(500, err);
@@ -296,6 +310,7 @@ var convertOrders = function(orders) {
 var ensurePlan = function(user, callback) {
   var settings = user.settings;
   var textLimit = user.settings.textLimit;
+  var textCount = user.settings.textCount;
   if(settings.plan.status == "active") {
     if(textCount < textLimit) {
       callback(null);
