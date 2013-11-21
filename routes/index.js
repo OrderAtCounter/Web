@@ -6,6 +6,8 @@ var Session = mongooseModels.Session;
 var Order = mongooseModels.Order;
 var api_key = process.env.STRIPE_TEST_KEY;
 var stripe = require('stripe')(api_key);
+var twilio = require('twilio');
+var twilioClient = new twilio.RestClient(process.env.TWILIO_ACCOUNT_SID, process.env.TWILIO_AUTH_TOKEN);
 
 /* POST for creating account */
 exports.createAccount = function(req, res) {
@@ -206,7 +208,18 @@ exports.fulfillOrder = function(req, res) {
           res.send(500, err);
         }
         else {
-          console.log('Plan ensured.');
+          twilioClient.sms.messages.create({
+            to: order.phoneNumber,
+            from: process.env.TWILIO_NUMBER,
+            body: req.user.settings.message
+          }, function(err, message) {
+            if(err) {
+              res.send(500, err);
+            }
+            else {
+              res.send(200);
+            }
+          });
         }
       });
     }
