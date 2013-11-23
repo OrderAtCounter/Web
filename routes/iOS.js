@@ -92,7 +92,7 @@ exports.createOrder = function(req, res) {
 exports.fulfillOrder = function(req, res) {
   var sessionId = req.body['sessionId'];
   var email = req.body['email'];
-  var orderNumber = req.body['orderNumber'];
+  var orderId = req.body['orderId'];
   ensureSession(email, sessionId, function(err, session) {
     if(err) {
       res.send(500, 'Error ensuring session.');
@@ -101,18 +101,99 @@ exports.fulfillOrder = function(req, res) {
       res.send(500, 'Session does not exist.');
     }
     else {
-      var user = req.user;
-      var message = user.settings.message;
-      twilioClient.sms.messages.create({
-        to: process.env.PHONE_NUMBER  ,
-        from: twilioNumber,
-        body: message
-      }, function(err, message) {
+      ensurePlan(req.user, function(err) {
         if(err) {
           res.send(500);
         }
         else {
-          Order.remove({email: user.email, orderNumber: orderNumber}, function(err) {
+          var user = req.user;
+          var message = user.settings.message;
+          if(req.body['message']) {
+            bodyMsg = req.body['message'];
+          }
+          else {
+            bodyMsg = message;
+          }
+          Order.findOne({_id: orderId}, function(err, order) {
+            if(err) {
+              res.send(500);
+            }
+            else {
+              twilioClient.sms.messages.create({
+                to: order.phoneNumber,
+                from: twilioNumber,
+                body: bodyMsg
+              }, function(err, message) {
+                if(err) {
+                  res.send(500);
+                }
+                else {
+                  Order.remove({_id: orderId}, function(err) {
+                    if(err) {
+                      res.send(500);
+                    }
+                    else {
+                      res.send(200);
+                    }
+                  });
+                }
+              });
+            }
+          });
+        }
+      });
+    }
+  });
+}
+
+exports.getMessage = function(req, res) {
+  var sessionId = req.body['sessionId'];
+  var email = req.body['email'];
+  ensureSession(email, sessionId, function(err, session) {
+    if(err) {
+      res.send(500);
+    }
+    else if(!session){
+      res.send(500);
+    }
+    else {
+      User.findOne({lowerEmail: email.toLowerCase()}, function(err, user) {
+        if(err) {
+          res.send(500);
+        }
+        else if(!user) {
+          res.send(500);
+        }
+        else {
+          res.json({message: user.settings.message});
+        }
+      });
+    }
+  });
+}
+
+exports.updateMessage = function(req, res) {
+  var sessionId = req.body['sessionId'];
+  var email = req.body['email'];
+  var message = req.body['message'];
+  ensureSession(email, sessionId, function(err, session) {
+    if(err) {
+      res.send(500);
+    }
+    else if(!session){
+      res.send(500);
+    }
+    else {
+      User.findOne({lowerEmail: email.toLowerCase()}, function(err, user) {
+        if(err) {
+          res.send(500);
+        }
+        else if(!user) {
+          res.send(500);
+        }
+        else {
+          user.settings.message = message;
+          user.save(function(err) {
             if(err) {
               res.send(500);
             }
@@ -206,4 +287,21 @@ var convertOrders = function(orders) {
     return order;
   });
   return convertedOrders;
+}
+
+var ensurePlan = function(user, callback) {
+  var settings = user.settings;
+  var textLimit = user.settings.textLimit;
+  var textCount = user.settings.textCount;
+  if(settings.plan.status == "active") {
+    if(textCount < textLimit) {
+      callback(null);
+    }
+    else {
+      callback('Over text limit.');
+    }
+  }
+  else {
+    callback(settings.plan.status);
+  }
 }
