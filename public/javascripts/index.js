@@ -1,3 +1,19 @@
+var fulfillOrderEvent = function() {
+  $('.readyButton').click(function() {
+    var orderId = $(this).attr('id');
+    $.ajax({
+      url: '/fulfillOrder',
+      method: 'POST',
+      data: {
+        orderId: orderId
+      },
+      success: function(data) {
+        console.log('Order sent.');
+      }
+    });
+  });
+}
+
 $('#newOrderButton').click(function() {
   var orderNumber = $('#orderInput').val();
   var phoneNumber = $('#phoneNumberInput').val();
@@ -12,38 +28,13 @@ $('#newOrderButton').click(function() {
       $('#activeOrdersBox').append(order);
       $('.newOrderInputs').val('');
       $('#orderInput').focus();
-      $('.readyButton').click(function() {
-        var orderNumber = $(this).parent().siblings('div').children('.orderNumber').text();
-        orderNumber = orderNumber.slice(1, orderNumber.length);
-        $.ajax({
-          url: '/fulfillOrder',
-          method: 'POST',
-          data: {
-            orderNumber: orderNumber
-          },
-          success: function(data) {
-
-          }
-        });
-      });
+      $('.readyButton').unbind('click');
+      fulfillOrderEvent();
     }
   });
 });
 
-$('.readyButton').click(function() {
-  var orderNumber = $(this).parent().siblings('div').children('.orderNumber').text();
-  orderNumber = orderNumber.slice(1, orderNumber.length);
-  $.ajax({
-    url: '/fulfillOrder',
-    method: 'POST',
-    data: {
-      orderNumber: orderNumber
-    },
-    success: function(data) {
-
-    }
-  });
-});
+fulfillOrderEvent();
 
 $('#orderInput').focus();
 $('#newOrderBox').keypress(function(e) {

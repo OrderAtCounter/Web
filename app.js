@@ -113,12 +113,14 @@ app.post('/selectPlan', ensureAuthenticated, webRoutes.selectPlan);
 /* iOS GET Routes */
 app.get('/iOSSettings', iOSRoutes.getSettings);
 app.get('/iOSOrders', iOSRoutes.getOrders);
+app.get('/iOSGetMessage', iOSRoutes.getMessage);
 
 /* iOS POST Routes */
 app.post('/iOSLogin', iOSRoutes.login);
 app.post('/iOSLogout', iOSRoutes.logout);
 app.post('/iOSOrder', iOSRoutes.createOrder);
 app.post('/iOSFulfillOrder', iOSRoutes.fulfillOrder);
+app.post('/iOSUpdateMessage', iOSRoutes.updateMessage);
 
 http.createServer(app).listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));
