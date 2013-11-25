@@ -99,6 +99,7 @@ app.get('/login', webRoutes.getLogin);
 app.get('/logout', webRoutes.getLogout);
 app.get('/settings', ensureAuthenticated, webRoutes.getSettings);
 app.get('/payment', ensureAuthenticated, webRoutes.getPayment);
+app.get('/analytics', ensureAuthenticated, webRoutes.getAnalytics);
 
 /* Web POST routes */
 app.post('/signup', webRoutes.createAccount);

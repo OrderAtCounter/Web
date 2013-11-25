@@ -289,6 +289,10 @@ exports.selectPlan = function(req, res) {
   });
 }
 
+exports.getAnalytics = function(req, res) {
+  
+}
+
 var convertOrders = function(orders) {
   var convertedOrders = orders.map(function(order) {
     var timestamp = order._id.getTimestamp();
