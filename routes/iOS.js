@@ -147,8 +147,8 @@ exports.fulfillOrder = function(req, res) {
 }
 
 exports.getMessage = function(req, res) {
-  var sessionId = req.body['sessionId'];
-  var email = req.body['email'];
+  var sessionId = req.params.sessionId;
+  var email = req.params.email;
   ensureSession(email, sessionId, function(err, session) {
     if(err) {
       res.send(500);
@@ -208,8 +208,8 @@ exports.updateMessage = function(req, res) {
 }
 
 exports.getOrders = function(req, res) {
-  var sessionId = req.body['sessionId'];
-  var email = req.body['email'];
+  var sessionId = req.params.sessionId;
+  var email = req.params.email;
   ensureSession(email, sessionId, function(err, session) {
     if(err) {
       res.send(500, 'Error ensuring session.');
@@ -231,8 +231,8 @@ exports.getOrders = function(req, res) {
 }
 
 exports.getSettings = function(req, res) {
-  var sessionId = req.body['sessionId'];
-  var email = req.body['email'];
+  var sessionId = req.params.sessionId;
+  var email = req.params.email;
   ensureSession(email, sessionId, function(err, session) {
     if(err) {
       res.send(500, 'Error ensuring session.');
