@@ -111,9 +111,9 @@ app.post('/setSignupCookie', ensureAuthenticated, webRoutes.setCookie);
 app.post('/selectPlan', ensureAuthenticated, webRoutes.selectPlan);
 
 /* iOS GET Routes */
-app.get('/iOSSettings', iOSRoutes.getSettings);
-app.get('/iOSOrders', iOSRoutes.getOrders);
-app.get('/iOSGetMessage', iOSRoutes.getMessage);
+app.post('/iOSSettings', iOSRoutes.getSettings);
+app.post('/iOSOrders', iOSRoutes.getOrders);
+app.post('/iOSGetMessage', iOSRoutes.getMessage);
 
 /* iOS POST Routes */
 app.post('/iOSLogin', iOSRoutes.login);
