@@ -128,7 +128,7 @@ exports.fulfillOrder = function(req, res) {
                   res.send(500);
                 }
                 else {
-                  Order.remove({_id: orderId}, function(err) {
+                  Order.update({_id: orderId}, {$set: {completed: false}}, function(err) {
                     if(err) {
                       res.send(500);
                     }
@@ -218,7 +218,7 @@ exports.getOrders = function(req, res) {
       res.send(500, 'Session does not exist.');
     }
     else {
-      Order.find({email: email}, function(err, orders) {
+      Order.find({email: email, completed: false}, function(err, orders) {
         if(err) {
           res.send(500);
         }
