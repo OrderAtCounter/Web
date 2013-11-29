@@ -101,45 +101,61 @@ exports.fulfillOrder = function(req, res) {
       res.send(500, 'Session does not exist.');
     }
     else {
+      User.findOne({lowerEmail: email.toLowerCase()}, function(err, user) {
+        ensurePlan(user, function(err) {
+          if(err) {
+            res.send(500);
+          }
+          else {
+            ensurePlan(user, function(err) {
+              if(err) {
+                res.send(500);
+              }
+              else {
+                var message = user.settings.message;
+                if(req.body['message']) {
+                  bodyMsg = req.body['message'];
+                }
+                else {
+                  bodyMsg = message;
+                }
+                Order.findOne({_id: orderId}, function(err, order) {
+                  if(err) {
+                    res.send(500);
+                  }
+                  else {
+                    twilioClient.sms.messages.create({
+                    to: order.phoneNumber,
+                    from: twilioNumber,
+                    body: bodyMsg
+                  }, function(err, message) {
+                    if(err) {
+                      res.send(500);
+                    }
+                    else {
+                      Order.update({_id: orderId}, {$set: {completed: true}}, function(err) {
+                        if(err) {
+                          res.send(500);
+                        }
+                        else {
+                          res.send(200);
+                        }
+                      });
+                    }
+                  });
+                }
+                });
+              }
+            });
+          }
+        })
+      });
       ensurePlan(req.user, function(err) {
         if(err) {
           res.send(500);
         }
         else {
-          var user = req.user;
-          var message = user.settings.message;
-          if(req.body['message']) {
-            bodyMsg = req.body['message'];
-          }
-          else {
-            bodyMsg = message;
-          }
-          Order.findOne({_id: orderId}, function(err, order) {
-            if(err) {
-              res.send(500);
-            }
-            else {
-              twilioClient.sms.messages.create({
-                to: order.phoneNumber,
-                from: twilioNumber,
-                body: bodyMsg
-              }, function(err, message) {
-                if(err) {
-                  res.send(500);
-                }
-                else {
-                  Order.update({_id: orderId}, {$set: {completed: false}}, function(err) {
-                    if(err) {
-                      res.send(500);
-                    }
-                    else {
-                      res.send(200);
-                    }
-                  });
-                }
-              });
-            }
-          });
+          
         }
       });
     }
@@ -242,6 +258,29 @@ exports.getSettings = function(req, res) {
     }
     else {
       res.json({settings: req.user.settings});
+    }
+  });
+}
+
+exports.getHistory = function(req, res) {
+  var sessionId = req.body['sessionId'];
+  var email = req.body['email'];
+  ensureSession(email, sessionId, function(err, session) {
+    if(err) {
+      res.send(500, 'Error ensuring session.');
+    }
+    else if(!session) {
+      res.send(500, 'Session does not exist.');
+    }
+    else {
+      Order.find({email: email, completed: true}, function(err, orders) {
+        if(err) {
+          res.send(500);
+        }
+        else {
+          res.json(convertOrders(orders));
+        }
+      });
     }
   });
 }

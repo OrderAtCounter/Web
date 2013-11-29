@@ -115,6 +115,7 @@ app.post('/selectPlan', ensureAuthenticated, webRoutes.selectPlan);
 app.post('/iOSSettings', iOSRoutes.getSettings);
 app.post('/iOSOrders', iOSRoutes.getOrders);
 app.post('/iOSGetMessage', iOSRoutes.getMessage);
+app.post('/iOSGetHistory', iOSRoutes.getHistory);
 
 /* iOS POST Routes */
 app.post('/iOSLogin', iOSRoutes.login);
