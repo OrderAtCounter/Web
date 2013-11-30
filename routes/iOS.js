@@ -119,6 +119,9 @@ exports.fulfillOrder = function(req, res) {
                 res.send(500);
               }
               else {
+                if(order.message) {
+                  bodyMsg = order.message;
+                }
                 twilioClient.sms.messages.create({
                 to: order.phoneNumber,
                 from: twilioNumber,
@@ -224,6 +227,9 @@ exports.getOrders = function(req, res) {
           res.send(500);
         }
         else {
+          var testOrders = convertOrders(order);
+          console.log(testOrders);
+          res.json(testOrders);
           res.json(convertOrders(orders));
         }
       });
@@ -264,6 +270,72 @@ exports.getHistory = function(req, res) {
         }
         else {
           res.json(convertOrders(orders));
+        }
+      });
+    }
+  });
+}
+
+exports.deleteOrder = function(req, res) {
+  var sessionId = req.body['sessionId'];
+  var email = req.body['email'];
+  var orderId = req.body['orderId'];
+  ensureSession(email, sessionId, function(err, session) {
+    if(err) {
+      res.send(500, 'Error ensuring session.');
+    }
+    else if(!session) {
+      res.send(500, 'Session does not exist.');
+    }
+    else {
+      Order.remove({orderId: orderId, email: email}, function(err) {
+        if(err) {
+          res.send(500, err);
+        }
+        else {
+          res.send(200);
+        }
+      });
+    }
+  });
+}
+
+exports.updateOrder = function(req, res) {
+  var sessionId = req.body['sessionId'];
+  var email = req.body['email'];
+  var orderId = req.body['orderId'];
+  var phoneNumber = req.body['phoneNumber'];
+  var orderNumber = req.body['orderNumber'];
+  var message = req.body['message'];
+  ensureSession(email, sessionId, function(err, session) {
+    if(err) {
+      res.send(500, 'Error ensuring session.');
+    }
+    else if(!session) {
+      res.send(500, 'Session does not exist.');
+    }
+    else {
+      Order.findOne({orderId: orderId, email: email}, function(err, order) {
+        if(err) {
+          res.send(500, err);
+        }
+        else if(!order) {
+          res.send(500, "Order does not exist.");
+        }
+        else {
+          order.phoneNumber = phoneNumber;
+          order.orderNumber = orderNumber;
+          if(message) {
+            order.message = message;
+          }
+          order.save(function(err) {
+            if(err) {
+              res.send(500, err);
+            }
+            else {
+              res.send(200);
+            }
+          });
         }
       });
     }

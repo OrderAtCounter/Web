@@ -24,7 +24,8 @@ var OrderSchema = new Schema({
   phoneNumber: String,
   completed: {type: Boolean, default: false},
   email: String,
-  timestamp: String
+  timestamp: String,
+  message: String
 });
 
 var User = mongoose.model('User', UserSchema);
