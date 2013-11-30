@@ -123,6 +123,8 @@ app.post('/iOSLogout', iOSRoutes.logout);
 app.post('/iOSOrder', iOSRoutes.createOrder);
 app.post('/iOSFulfillOrder', iOSRoutes.fulfillOrder);
 app.post('/iOSUpdateMessage', iOSRoutes.updateMessage);
+app.post('/iOSDeleteOrder', iOSRoutes.deleteOrder);
+app.post('/iOSUpdateOrder', iOSRoutes.updateOrder);
 
 http.createServer(app).listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));
