@@ -107,56 +107,41 @@ exports.fulfillOrder = function(req, res) {
             res.send(500);
           }
           else {
-            ensurePlan(user, function(err) {
+            var message = user.settings.message;
+            if(req.body['message']) {
+              bodyMsg = req.body['message'];
+            }
+            else {
+              bodyMsg = message;
+            }
+            Order.findOne({_id: orderId}, function(err, order) {
               if(err) {
                 res.send(500);
               }
               else {
-                var message = user.settings.message;
-                if(req.body['message']) {
-                  bodyMsg = req.body['message'];
+                twilioClient.sms.messages.create({
+                to: order.phoneNumber,
+                from: twilioNumber,
+                body: bodyMsg
+              }, function(err, message) {
+                if(err) {
+                  res.send(500);
                 }
                 else {
-                  bodyMsg = message;
-                }
-                Order.findOne({_id: orderId}, function(err, order) {
-                  if(err) {
-                    res.send(500);
-                  }
-                  else {
-                    twilioClient.sms.messages.create({
-                    to: order.phoneNumber,
-                    from: twilioNumber,
-                    body: bodyMsg
-                  }, function(err, message) {
+                  Order.update({_id: orderId}, {$set: {completed: true}}, function(err) {
                     if(err) {
                       res.send(500);
                     }
                     else {
-                      Order.update({_id: orderId}, {$set: {completed: true}}, function(err) {
-                        if(err) {
-                          res.send(500);
-                        }
-                        else {
-                          res.send(200);
-                        }
-                      });
+                      res.send(200);
                     }
                   });
                 }
-                });
-              }
+              });
+            }
             });
           }
         })
-      });
-      ensurePlan(req.user, function(err) {
-        if(err) {
-          res.send(500);
-        }
-        else {
-          
-        }
       });
     }
   });
