@@ -227,9 +227,6 @@ exports.getOrders = function(req, res) {
           res.send(500);
         }
         else {
-          var testOrders = convertOrders(order);
-          console.log(testOrders);
-          res.json(testOrders);
           res.json(convertOrders(orders));
         }
       });
