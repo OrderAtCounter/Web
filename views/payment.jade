@@ -4,6 +4,7 @@ html
     include bootstrap
     link(rel='stylesheet', href='/stylesheets/payment.css')
     script(src='/javascripts/stripe-card.js')
+    title Ready - Payment
   body
     include nav
     div.container.priceContainer
@@ -41,6 +42,8 @@ html
           label.inputLabel(for='Expiry') Expiration Date
           input.form-control#expirationInput(name='Expiry', type='text')
       div.createPlanButton Subscribe and Pay
+    if plan
+      input(type='hidden', value='{plan}')
     script(type='text/javascript', src='https://js.stripe.com/v2/')
     script(type='text/javascript', src='/javascripts/payment.js')
     script(type='text/javascript', src='/javascripts/nav.js')

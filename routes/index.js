@@ -238,7 +238,6 @@ exports.fulfillOrder = function(req, res) {
 exports.setCookie = function(req, res) {
   var plan = req.body['plan'];
   res.cookie('plan', plan, {maxAge: 100000});
-  res.send(200);
 }
 
 exports.getPayment = function(req, res) {
