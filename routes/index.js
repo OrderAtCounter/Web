@@ -209,10 +209,12 @@ exports.fulfillOrder = function(req, res) {
           res.send(500, err);
         }
         else {
+          var msg = req.user.settings.message;
+          msg += ' Order Number: ' + order.orderNumber + '.';
           twilioClient.sms.messages.create({
             to: order.phoneNumber,
             from: process.env.TWILIO_NUMBER,
-            body: req.user.settings.message
+            body: msg
           }, function(err, message) {
             if(err) {
               res.send(500, err);

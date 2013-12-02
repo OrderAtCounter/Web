@@ -129,6 +129,7 @@ exports.fulfillOrder = function(req, res) {
                 if(order.message) {
                   bodyMsg = order.message;
                 }
+                bodyMsg += 'Order Number: ' + order.orderNumber + '.';
                 twilioClient.sms.messages.create({
                 to: order.phoneNumber,
                 from: twilioNumber,
