@@ -49,3 +49,10 @@ $('#newOrderBox').keypress(function(e) {
 $('#emptyTextBox').click(function() {
   $('#orderInput').focus();
 });
+
+$('.order').hover(function() {
+  $(this).css('border', '1px solid #71C2D3');
+}, function() {
+  $(this).css('border', '1px solid #AFAFAF');
+  $(this).css('border-top', 'none');
+});

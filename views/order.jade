@@ -15,3 +15,10 @@ div.order
           div.phoneTimestamp #{order.timestamp}
     div.col-md-5.col-xs-12
       button.readyButton(id="#{order._id}") Send Text
+      div.dropdown
+        img.dropdownImage.dropdown-toggle#dImage(src='/images/droppy.png', data-toggle='dropdown')
+        ul.dropdown-menu.pull-right(role='menu', aria-labelledby='dImage')
+          li(role='presentation')
+            p.edit Edit
+          li(role='presentation')
+            p.delete Delete

@@ -75,7 +75,7 @@
   margin-top: 8px;
   border-top: 1px solid #AFAFAF;
   margin-bottom: 20px;
-  width: 80%;
+  width: 90%;
 }
 
 #activeOrdersTitle {
@@ -118,7 +118,7 @@
   width: 150px;
   height: 40px;
   margin-top: 20px;
-  margin-left: 20px;
+  margin-left: 15px;
 }
 
 .phoneNumber, .phoneTimestamp {
@@ -159,4 +159,26 @@
 #emptyTextArrow {
   margin-left: 10px;
   margin-bottom: 2px;
+}
+
+.dropdownImage:hover {
+  cursor: pointer;
+}
+
+.dropdownImage {
+  float: right;
+  margin-top: -33px;
+  margin-right: 20px;
+}
+
+.edit, .delete {
+  font-size: 12px;
+  font-family: 'Montserrat', sans-serif;
+  text-align: center;
+  height: 12px;
+}
+
+.edit:hover, .delete:hover {
+  cursor: pointer;
+  text-decoration: underline;
 }
