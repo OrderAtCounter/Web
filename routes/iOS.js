@@ -76,6 +76,13 @@ exports.createOrder = function(req, res) {
     else {
       var orderNumber = req.body['orderNumber'];
       var phoneNumber = req.body['phoneNumber'];
+      var newPhoneNumber = '';
+      for(var i = 0; i < phoneNumber.length; i++) {
+        if(phoneNumber.charCodeAt(i) >= 48 && phoneNumber.charCodeAt(i) <= 57) {
+          newPhoneNumber += phoneNumber.charAt(i);
+        }
+      }
+      phoneNumber = newPhoneNumber;
       var order = new Order({orderNumber: orderNumber, phoneNumber: phoneNumber, email: email});
       order.save(function(err, newOrder) {
         if(err) {
