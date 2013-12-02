@@ -138,3 +138,25 @@
 .order:nth-child(odd) {
   background-color: #FDFDFD;
 }
+
+#emptyText {
+  font-size: 16px;
+  font-family: 'Montserrat', sans-serif;
+  color: #AFAFAF;
+  padding-top: 20px;
+}
+
+#emptyTextBox {
+  width: 100%;
+  min-height: 60px;
+}
+
+#emptyTextBox:hover {
+  cursor: pointer;
+  background-color: #FDFDFD;
+}
+
+#emptyTextArrow {
+  margin-left: 10px;
+  margin-bottom: 2px;
+}

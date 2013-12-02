@@ -29,6 +29,7 @@ $('#newOrderButton').click(function() {
       $('.newOrderInputs').val('');
       $('#orderInput').focus();
       $('.readyButton').unbind('click');
+      $('#emptyTextBox').remove();
       fulfillOrderEvent();
     }
   });
@@ -43,4 +44,8 @@ $('#newOrderBox').keypress(function(e) {
       $('#newOrderButton').click();
     }
   }
+});
+
+$('#emptyTextBox').click(function() {
+  $('#orderInput').focus();
 });

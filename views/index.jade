@@ -22,7 +22,13 @@ html
         div.col-md-7.col-xs-12#activeOrdersColumn
           div#activeOrdersTitle Active Orders
           div#activeOrdersBox
+            if orders.length != 0
             for order in orders
               +order(order)
+            else
+              div#emptyTextBox
+                div#emptyText Add A New Order To Get Started
+                  span
+                    img#emptyTextArrow(src='/images/arrow.png', alt='Arrow')
     script(type='text/javascript', src='/javascripts/index.js')
     script(type='text/javascript', src='/javascripts/nav.js')
