@@ -286,7 +286,7 @@ exports.deleteOrder = function(req, res) {
       res.send(500, 'Session does not exist.');
     }
     else {
-      Order.remove({orderId: orderId, email: email}, function(err) {
+      Order.remove({_id: orderId, email: email}, function(err) {
         if(err) {
           res.send(500, err);
         }
@@ -313,7 +313,7 @@ exports.updateOrder = function(req, res) {
       res.send(500, 'Session does not exist.');
     }
     else {
-      Order.findOne({orderId: orderId, email: email}, function(err, order) {
+      Order.findOne({_id: orderId, email: email}, function(err, order) {
         if(err) {
           res.send(500, err);
         }

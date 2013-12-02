@@ -72,15 +72,12 @@
 
 #mainPricing {
   background-color: #FFFFFF;
-  height: 450px;
 }
 
 #freeDiv {
-  height: 200px;
   margin-left: 54px;
   width: 400px;
-  float: left;
-  margin-top: -100px;
+  margin-top: 20px;
 }
 
 #freeText1 {
@@ -93,4 +90,93 @@
   font-family: 'Montserrat', sans-serif;
   font-size: 27px;
   color: #4C4A49;
+}
+
+.priceBox {
+  width: 900px;
+  margin-top: -400px;
+  margin-left: 120px;
+  height: 200px;
+}
+
+.priceTab {
+  width: 33%;
+  height: 140px;
+}
+
+.priceTab:nth-child(1) {
+  float: right;
+}
+
+.priceTab:nth-child(2) {
+  float: right;
+  margin-right: .6%;
+}
+
+.priceTab:nth-child(3) {
+  
+} 
+
+.priceHeaderDiv {
+  height: 50px;
+  text-align: center;
+  font-size: 18px;
+  font-family: 'Montserrat', sans-serif;
+  color: #FFFFFF;
+  padding-top: 12px;
+}
+
+.priceTab:first-child .priceHeaderDiv {
+  background-color: #EF493A;
+}
+
+.priceTab:nth-child(2) .priceHeaderDiv {
+  background-color: #71C2B3;
+}
+
+.priceTab:nth-child(3) .priceHeaderDiv {
+  background-color: #4C4A49;
+}
+
+.price {
+  padding-top: 15px;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 24px;
+  color: #4C4A49;
+  text-align: center;
+}
+
+.priceSpan {
+  font-size: 16px;
+  margin-left: 5px;
+}
+
+.priceMainDiv {
+  background-color: #F7F7F5;
+  height: 110px;
+}
+
+.choosePlan {
+  margin: 0 auto;
+  text-align: center;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 16px;
+  cursor: pointer;
+  color: #FFFFFF;
+  margin-top: 20px;
+  width: 150px;
+  height: 30px;
+  padding-top: 4px;
+}
+
+.priceTab:first-child .priceMainDiv .choosePlan {
+  background-color: #EF493A;
+}
+
+.priceTab:nth-child(2) .priceMainDiv .choosePlan {
+  background-color: #71C2B3;
+}
+
+.priceTab:nth-child(3) .priceMainDiv .choosePlan {
+  background-color: #4C4A49;
 }
