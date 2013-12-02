@@ -210,7 +210,7 @@ exports.fulfillOrder = function(req, res) {
         }
         else {
           var msg = req.user.settings.message;
-          msg += '%0aOrder Number: ' + order.orderNumber + '.';
+          msg += '\nOrder Number: ' + order.orderNumber + '.';
           twilioClient.sms.messages.create({
             to: order.phoneNumber,
             from: process.env.TWILIO_NUMBER,
