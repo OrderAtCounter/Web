@@ -9,7 +9,6 @@ var express = require('express')
   , RedisStore = require('connect-redis')(express);
 
 var app = express();
-
 var redisOptions = {};
 
 if(process.env.NODE_ENV === 'development') {
@@ -41,8 +40,8 @@ var iOSRoutes = require('./routes/iOS');
 
 app.set('port', process.env.PORT || 3000);
 app.set('views', __dirname + '/views');
+app.use(express.favicon('./public/favicon.ico'));
 app.set('view engine', 'jade');
-app.use(express.favicon());
 app.use(express.logger('dev'));
 app.use(express.bodyParser());
 app.use(express.cookieParser('secret'));
