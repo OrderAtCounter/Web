@@ -23,6 +23,7 @@ exports.createAccount = function(req, res) {
     }
     else {
       var newUser = new User({email: email, lowerEmail: email.toLowerCase(), password: password, businessName: businessName});
+      newUser.settings.message = 'Your order from ' + businessName + ' is ready!';
       newUser.save(function(err, returnedUser) {
         if(err) {
           res.send(500, 'There was an error in saving the new user.');
