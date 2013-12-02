@@ -34,7 +34,6 @@ var webRoutes = require('./routes');
 
 var iOSRoutes = require('./routes/iOS');
 
-var redisOptions = {};
 
 redisOptions.host = process.env.redisHost;
 redisOptions.port = process.env.redisPort;
