@@ -11,9 +11,10 @@
 
 #newOrderBox {
   margin-top: 8px;
-  border: 2px solid #939598;
+  border: 1px solid #AFAFAF;
   height: 38%;
-  min-height: 250px;
+  min-height: 290px;
+  width: 400px;
 }
 
 @media(min-width: 992px) {
@@ -37,11 +38,24 @@
   margin-left: 20px;
   margin-top: 20px;
   font-family: 'Montserrat', sans-serif;
-  font-size: 14px;
+  font-size: 18px;
   width: 90%;
-  height: 30px;
+  height: 40px;
   border-radius: 2px;
-  border: 1px solid #939598;
+  border: 1px solid #AFAFAF;
+}
+
+.newOrderInputs::-webkit-input-placeholder {
+  color: #D1D2D3;
+}
+.newOrderInputs:-moz-placeholder {
+  color: #D1D2D3;
+}
+.newOrderInputs::-moz-placeholder {
+  color: #D1D2D3;
+}
+.newOrderInputs:-ms-input-placeholder {
+  color: #D1D2D3;
 }
 
 #newOrderButton {
@@ -49,7 +63,7 @@
   font-family: 'Montserrat', sans-serif;
   font-size: 16px;
   margin-top: 20px;
-  height: 40px;
+  height: 50px;
   margin-left: 20px;
   background-color: #71C2B3;
   border: none;
@@ -58,8 +72,9 @@
 
 #activeOrdersBox {
   margin-top: 8px;
-  border-top: 2px solid #939598;
+  border-top: 1px solid #AFAFAF;
   margin-bottom: 20px;
+  width: 80%;
 }
 
 #activeOrdersTitle {
@@ -74,9 +89,10 @@
 }
 
 .order {
-  border-bottom: 2px solid #939598;
-  border-left: 2px solid #939598;
-  border-right: 2px solid #939598;
+  border-bottom: 1px solid #AFAFAF;
+  border-left: 1px solid #AFAFAF;
+  border-right: 1px solid #AFAFAF;
+  min-height: 80px;
 }
 
 .order:first-child {
@@ -87,21 +103,37 @@
   font-family: 'Montserrat', sans-serif;
   font-weight: bold;
   font-size: 30px;
+  margin-top: 20px;
+  margin-left: 25px;
   color: #4C4A49;
 }
 
 .readyButton {
   font-family: 'Montserrat', sans-serif;
-  font-weight: bold;
   font-size: 16px;
-  color: #71C2B3;
-  border: 3px solid #71C2B3;
+  color: #EF493A;
+  border: 1px solid #EF493A;
   background-color: #FFFFFF;
-  margin-top: 4px;
+  width: 150px;
+  height: 40px;
+  margin-top: 20px;
+  margin-left: 20px;
 }
 
 .phoneNumber, .phoneTimestamp {
   font-family: 'Montserrat', sans-serif;
   font-size: 15px;
   color: #000000;
+}
+
+.phoneNumber {
+  margin-top: 20px;
+}
+
+.phone {
+  margin-top: 24px;
+}
+
+.order:nth-child(odd) {
+  background-color: #FDFDFD;
 }

@@ -217,7 +217,15 @@ exports.fulfillOrder = function(req, res) {
               res.send(500, err);
             }
             else {
-              res.send(200);
+              order.completed = true;
+              order.save(function(err) {
+                if(err) {
+                  res.send(500, err);
+                }
+                else {
+                  res.send(200);
+                }
+              });
             }
           });
         }

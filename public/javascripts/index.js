@@ -8,7 +8,7 @@ var fulfillOrderEvent = function() {
         orderId: orderId
       },
       success: function(data) {
-        console.log('Order sent.');
+        $('.readyButton#' + orderId).parent().parent().parent().remove();
       }
     });
   });

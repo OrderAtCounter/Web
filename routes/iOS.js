@@ -104,7 +104,7 @@ exports.fulfillOrder = function(req, res) {
       User.findOne({lowerEmail: email.toLowerCase()}, function(err, user) {
         ensurePlan(user, function(err) {
           if(err) {
-            res.send(500);
+            res.send(500, err);
           }
           else {
             var message = user.settings.message;
@@ -116,7 +116,7 @@ exports.fulfillOrder = function(req, res) {
             }
             Order.findOne({_id: orderId}, function(err, order) {
               if(err) {
-                res.send(500);
+                res.send(500, err);
               }
               else {
                 if(order.message) {
@@ -128,12 +128,13 @@ exports.fulfillOrder = function(req, res) {
                 body: bodyMsg
               }, function(err, message) {
                 if(err) {
-                  res.send(500);
+                  res.send(500, err);
                 }
                 else {
-                  Order.update({_id: orderId}, {$set: {completed: true}}, function(err) {
+                  order.completed = true;
+                  order.save(function(err) {
                     if(err) {
-                      res.send(500);
+                      res.send(500, err);
                     }
                     else {
                       res.send(200);
