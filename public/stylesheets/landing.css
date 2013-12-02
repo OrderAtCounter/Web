@@ -6,12 +6,15 @@
 #aboutTextColumn {
   width: 500px;
   height: 400px;
+  margin-left: 60px;
+  float: left;
 }
 
 #aboutImageColumn {
-  width: 460px;
-  float: right;
+  width: 420px;
   height: 400px;
+  margin-top: 25px;
+  float: right;
 }
 
 #textRow1 {
@@ -75,9 +78,8 @@
 }
 
 #freeDiv {
-  margin-left: 54px;
+  margin-left: 120px;
   width: 400px;
-  margin-top: 20px;
 }
 
 #freeText1 {
@@ -94,8 +96,8 @@
 
 .priceBox {
   width: 900px;
-  margin-top: -400px;
   margin-left: 120px;
+  margin-top: 20px;
   height: 200px;
 }
 
@@ -179,4 +181,10 @@
 
 .priceTab:nth-child(3) .priceMainDiv .choosePlan {
   background-color: #4C4A49;
+}
+
+.handImage {
+  width: 400px;
+  height: 250px;
+  opacity: .8;
 }
